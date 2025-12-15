@@ -1,5 +1,7 @@
 package br.com.adaicollege.studentPortal.config.utils;
 
+import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
+
 import java.time.LocalDate;
 
 public class PasswordUtils {
@@ -13,16 +15,21 @@ public class PasswordUtils {
         int year = today.getYear();
         int month = today.getMonthValue();
 
-        // course enrolled
-        String courseEnrolled = course.substring(
-                // change this logic
-                course.length() - 2
-        );
+        CollegeCourse collegeCourse = CollegeCourse.valueOf(course);
 
-        String lastDigits = registrationNumber.substring(
-                registrationNumber.length() - 4
-        );
+        String courseCode;
+        if (collegeCourse == CollegeCourse.COLLEGE_INTENSIVE) {
+            courseCode = "TI";
+        } else if (collegeCourse == CollegeCourse.COLLEGE_MASTER) {
+            courseCode = "TM";
+        } else if (collegeCourse == CollegeCourse.COLLEGE_COORP) {
+            courseCode = "TC";
+        } else {
+            throw new RuntimeException("Course not enabled");
+        }
 
-        return year + String.format("%02d", month) + lastDigits;
+        String lastDigits = registrationNumber.substring(registrationNumber.length() - 4);
+
+        return courseCode + year + String.format("%02d", month) + lastDigits;
     }
 }
