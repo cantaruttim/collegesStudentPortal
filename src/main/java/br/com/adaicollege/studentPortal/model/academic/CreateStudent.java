@@ -1,5 +1,7 @@
 package br.com.adaicollege.studentPortal.model.academic;
 
+import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -13,7 +15,9 @@ public class CreateStudent {
     private String familyName;
     private String email;
     private LocalDate birthDate;
-    private String courseEnrolled;
+    private CollegeCourse courseEnrolled;
+    private Modules moduleName;
+    private Teachers teacherName;
     private String studentStatus; // active or not
 
     private LocalDateTime enrolledAt;
