@@ -1,11 +1,11 @@
-package br.com.adaicollege.studentPortal.model;
+package br.com.adaicollege.studentPortal.model.auth;
 
-public class StudentLogin {
+public class UserLogin {
 
     private String registrationNumber;
     private String studentPassword;
 
-    public StudentLogin() {}
+    public UserLogin() {}
 
     public String getRegistrationNumber() {
         return registrationNumber;
