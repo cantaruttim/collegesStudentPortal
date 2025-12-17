@@ -4,13 +4,12 @@ public class StudentGrades {
 
     // @Id
     private Integer id;
-    private String registrationNumber;
+    private CreateStudent registrationNumber;
     private Integer activityResponse;
     private Integer examGrade;
     private Integer finalGrade;
 
     public StudentGrades() {}
-
 
     public Integer getId() {
         return id;
@@ -20,11 +19,11 @@ public class StudentGrades {
         this.id = id;
     }
 
-    public String getRegistrationNumber() {
+    public CreateStudent getRegistrationNumber() {
         return registrationNumber;
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
+    public void setRegistrationNumber(CreateStudent registrationNumber) {
         this.registrationNumber = registrationNumber;
     }
 

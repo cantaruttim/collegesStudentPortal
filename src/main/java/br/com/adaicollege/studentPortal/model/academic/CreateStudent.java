@@ -11,7 +11,7 @@ public class CreateStudent {
     // @Id
     private String id;
 
-    private String registrationNumber;
+    private String socialSecurityNumber;
     private String firstName;
     private String familyName;
     private String email;
