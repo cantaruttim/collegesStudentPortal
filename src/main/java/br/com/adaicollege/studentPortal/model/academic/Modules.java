@@ -8,7 +8,7 @@ public class Modules {
     private String id;
     private String moduleName;
     private String moduleDescription;
-    private Teachers teacherName;
+    private Teacher teacherName;
     private CollegeCourse course;
 
     public Modules() {}

@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.model.forms;
 
 import br.com.adaicollege.studentPortal.model.academic.Modules;
-import br.com.adaicollege.studentPortal.model.academic.Teachers;
+import br.com.adaicollege.studentPortal.model.academic.Teacher;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +15,7 @@ public class StudentsActivityForms {
     private String email;
 
     private Modules moduleId;
-    private Teachers teacherId;
+    private Teacher teacherId;
 
     private String firstQuestion;
     private String secondQuestion;
@@ -64,11 +64,11 @@ public class StudentsActivityForms {
         this.moduleId = moduleId;
     }
 
-    public Teachers getTeacherId() {
+    public Teacher getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(Teachers teacherId) {
+    public void setTeacherId(Teacher teacherId) {
         this.teacherId = teacherId;
     }
 

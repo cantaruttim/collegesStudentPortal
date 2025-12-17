@@ -2,7 +2,7 @@ package br.com.adaicollege.studentPortal.model.academic;
 
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 
-public class Teachers {
+public class Teacher {
 
     // @Id
     private Integer id;
@@ -11,6 +11,6 @@ public class Teachers {
     private Modules moduleName;
     private CollegeCourse courseLectures;
 
-    public Teachers() {}
+    public Teacher() {}
 
 }
