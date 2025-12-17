@@ -30,6 +30,7 @@ public class PasswordUtils {
 
         String lastDigits = registrationNumber.substring(registrationNumber.length() - 4);
 
-        return courseCode + year + String.format("%02d", month) + lastDigits;
+        // study the best way to concat this.
+        return year + courseCode + String.format("%02d", month) + lastDigits;
     }
 }
