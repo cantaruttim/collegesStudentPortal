@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public class PasswordUtils {
     public static String defaultPassword(String registrationNumber, String course) {
+    // used when a student is created
 
         if (registrationNumber == null || registrationNumber.length() < 4) {
             throw new IllegalArgumentException("Invalid registration number");

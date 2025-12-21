@@ -7,10 +7,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Configuration
-public class SecurityConfig {
+public class CryptPassword {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        // used when a student is created
         return new BCryptPasswordEncoder();
     }
 
