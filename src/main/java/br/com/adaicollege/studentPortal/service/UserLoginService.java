@@ -1,0 +1,24 @@
+package br.com.adaicollege.studentPortal.service;
+
+import br.com.adaicollege.studentPortal.model.auth.UserLogin;
+import br.com.adaicollege.studentPortal.repository.UserLoginRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserLoginService {
+
+
+    private final UserLoginRepository repo;
+    public UserLoginService(UserLoginRepository repo) {
+        this.repo = repo;
+    }
+
+    public UserLogin addUser(UserLogin user ) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setStudentPassword(encoder.encode(user.getStudentPassword()));
+
+        return repo.save(user);
+    }
+
+}
