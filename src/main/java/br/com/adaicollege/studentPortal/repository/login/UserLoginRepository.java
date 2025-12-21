@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.repository;
+package br.com.adaicollege.studentPortal.repository.login;
 
 
 import br.com.adaicollege.studentPortal.model.login.UserLogin;

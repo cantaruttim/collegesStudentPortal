@@ -1,8 +1,8 @@
-package br.com.adaicollege.studentPortal.service;
+package br.com.adaicollege.studentPortal.service.login;
 
 import br.com.adaicollege.studentPortal.config.security.MyToken;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
-import br.com.adaicollege.studentPortal.repository.UserLoginRepository;
+import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
