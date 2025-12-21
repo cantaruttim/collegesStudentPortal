@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.config.utils;
 
 import br.com.adaicollege.studentPortal.config.security.MyToken;
-import br.com.adaicollege.studentPortal.model.auth.UserLogin;
+import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

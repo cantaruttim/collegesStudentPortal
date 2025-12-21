@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.model.auth;
+package br.com.adaicollege.studentPortal.model.login;
 
 public class UserLogin {
 
