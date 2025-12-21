@@ -31,11 +31,13 @@ public class UserLoginService {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        if (!encoder.matches(user.getStudentPassword(), storedUser.getStudentPassword())) {
-            throw new RuntimeException("Invalid password");
+
+        if (encoder.matches(user.getStudentPassword(), storedUser.getStudentPassword())) {
+            return new MyToken("security123");
+            // return TokenUtil.encode(storedUser);
         }
 
-        return new MyToken(storedUser.getRegistrationNumber());
+        throw new RuntimeException("Unauthorized!");
     }
 
 }
