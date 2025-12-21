@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.config.security;
+package br.com.adaicollege.studentPortal.config.security.defaultPassword;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

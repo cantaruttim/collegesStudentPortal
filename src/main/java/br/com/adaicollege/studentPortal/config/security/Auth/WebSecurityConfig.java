@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.config.security;
+package br.com.adaicollege.studentPortal.config.security.Auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,11 +14,14 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        /*
+        *  Responsible to filter requests and tokens
+        * */
 
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests( (auth) -> {
                     auth.requestMatchers(
-                            new AntPathRequestMatcher("/open", "GET")).permitAll()
+                            new AntPathRequestMatcher("//student-login/login", "GET")).permitAll()
                             .anyRequest().authenticated();
                 });
 

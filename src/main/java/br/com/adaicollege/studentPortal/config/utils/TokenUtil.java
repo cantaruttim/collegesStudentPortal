@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.config.utils;
 
-import br.com.adaicollege.studentPortal.config.security.MyToken;
+import br.com.adaicollege.studentPortal.config.security.Auth.MyToken;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +12,7 @@ public class TokenUtil {
 
     public MyToken encode(UserLogin user) {
         try {
+            // on implementation
 
         } catch (Exception ex) {
             ex.printStackTrace();

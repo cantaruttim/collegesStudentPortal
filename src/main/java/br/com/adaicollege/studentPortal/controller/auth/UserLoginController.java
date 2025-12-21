@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.controller.auth;
 
 
-import br.com.adaicollege.studentPortal.config.security.MyToken;
+import br.com.adaicollege.studentPortal.config.security.Auth.MyToken;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.service.login.UserLoginService;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class UserLoginController {
         this.service = service;
     }
 
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<MyToken> login(@RequestBody UserLogin user) {
         MyToken token = service.userLogin(user);
         return ResponseEntity.ok(token);
