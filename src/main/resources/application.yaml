@@ -3,5 +3,11 @@ spring:
     mongodb:
       uri: ${SPRING_DATA_MONGODB_URI}
 
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+    org.springframework.data.mongodb.repository.query: DEBUG
+
+
 server:
   port: 8080
