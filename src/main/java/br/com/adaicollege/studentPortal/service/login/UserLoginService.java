@@ -26,7 +26,7 @@ public class UserLoginService {
     public MyToken userLogin(UserLogin user) {
 
         UserLogin storedUser = repo
-                .findByUserRegistrationNumber(user.getRegistrationNumber())
+                .findByRegistrationNumber(user.getRegistrationNumber())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

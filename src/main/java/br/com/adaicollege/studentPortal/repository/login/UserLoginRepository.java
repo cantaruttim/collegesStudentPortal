@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface UserLoginRepository extends MongoRepository<UserLogin, String> {
 
-    Optional<UserLogin> findByUserRegistrationNumber(String registrationNumber);
+    Optional<UserLogin> findByRegistrationNumber(String registrationNumber);
 
 }
