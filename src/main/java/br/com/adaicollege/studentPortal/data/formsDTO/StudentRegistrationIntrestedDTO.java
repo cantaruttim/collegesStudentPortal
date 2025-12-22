@@ -1,9 +1,8 @@
-package br.com.adaicollege.studentPortal.model.forms;
+package br.com.adaicollege.studentPortal.data.formsDTO;
 
 import java.time.LocalDateTime;
 
-public class StudentRegistrationIntrested {
-    // Student Prospect
+public class StudentRegistrationIntrestedDTO {
 
     // @Id
     private Integer id;
@@ -14,7 +13,7 @@ public class StudentRegistrationIntrested {
     private String question;
     private LocalDateTime createAt;
 
-    public StudentRegistrationIntrested() {}
+    public StudentRegistrationIntrestedDTO(){}
 
     public Integer getId() {
         return id;
