@@ -22,6 +22,11 @@ public class StudentsActivityFormsMapper {
         // activityForms.setModuleId(dto.getModuleId());
         // activityForms.setTeacherId(dto.getTeacherId());
 
+        activityForms.setFirstQuestion(dto.getFirstQuestion());
+        activityForms.setSecondQuestion(dto.getSecondQuestion());
+        activityForms.setCreatedAt(dto.getCreatedAt());
+
+
         return activityForms;
     }
 
@@ -41,6 +46,11 @@ public class StudentsActivityFormsMapper {
         // IMPLEMENT COMPOSITION
         // dto.setModuleId(activityForms.getModuleId());
         // dto.setTeacherId(activityForms.getTeacherId());
+
+        dto.setFirstQuestion(activityForms.getFirstQuestion());
+        dto.setSecondQuestion(activityForms.getSecondQuestion());
+        dto.setCreatedAt(activityForms.getCreatedAt());
+
 
         return dto;
     }

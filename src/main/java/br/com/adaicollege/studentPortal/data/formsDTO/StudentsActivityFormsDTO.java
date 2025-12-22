@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 public class StudentsActivityFormsDTO {
 
+    // @Id
     private String id;
     private String registrationNumber;
     private String fullName;
