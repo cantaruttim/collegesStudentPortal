@@ -13,4 +13,43 @@ public class Teacher {
 
     public Teacher() {}
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public Modules getModuleName() {
+        return moduleName;
+    }
+
+    public void setModuleName(Modules moduleName) {
+        this.moduleName = moduleName;
+    }
+
+    public CollegeCourse getCourseLectures() {
+        return courseLectures;
+    }
+
+    public void setCourseLectures(CollegeCourse courseLectures) {
+        this.courseLectures = courseLectures;
+    }
 }
