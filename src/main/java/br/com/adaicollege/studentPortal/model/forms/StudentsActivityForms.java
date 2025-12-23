@@ -2,13 +2,17 @@ package br.com.adaicollege.studentPortal.model.forms;
 
 import br.com.adaicollege.studentPortal.model.academic.Modules;
 import br.com.adaicollege.studentPortal.model.academic.Teacher;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+
+@Document
 public class StudentsActivityForms {
     // represents the data after each class
 
-    // @Id
+     @Id
     private String id;
     private String registrationNumber;
     private String fullName;

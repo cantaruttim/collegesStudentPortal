@@ -1,11 +1,12 @@
 package br.com.adaicollege.studentPortal.model.academic;
 
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
+import org.springframework.data.annotation.Id;
 
 public class Teacher {
 
-    // @Id
-    private Integer id;
+    @Id
+    private String id;
     private String firstName;
     private String familyName;
     private Modules moduleName;
@@ -13,11 +14,11 @@ public class Teacher {
 
     public Teacher() {}
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

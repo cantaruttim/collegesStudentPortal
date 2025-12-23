@@ -2,13 +2,16 @@ package br.com.adaicollege.studentPortal.model.academic;
 
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Document
 public class CreateStudent {
 
-    // @Id
+    @Id
     private String id;
 
     private String socialSecurityNumber;

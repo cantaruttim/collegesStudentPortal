@@ -1,12 +1,15 @@
 package br.com.adaicollege.studentPortal.model.academic;
 
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
+@Document
 public class Modules {
 
-    // @Id
+    @Id
     private String id;
     private String moduleName;
     private String moduleDescription;
