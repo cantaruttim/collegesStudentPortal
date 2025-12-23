@@ -20,10 +20,10 @@ public class UserLoginController {
         this.service = service;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<MyToken> login(@RequestBody UserLogin user) {
-        MyToken token = service.userLogin(user);
-        return ResponseEntity.ok(token);
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<MyToken> login(@RequestBody UserLogin user) {
+//        MyToken token = service.userLogin(user);
+//        return ResponseEntity.ok(token);
+//    }
 
 }

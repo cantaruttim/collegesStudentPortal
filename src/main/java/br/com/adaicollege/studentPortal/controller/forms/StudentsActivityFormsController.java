@@ -15,9 +15,6 @@ import java.util.List;
 public class StudentsActivityFormsController {
 
     @Autowired
-    private StudentActivityFormsRepository repo;
-
-    @Autowired
     private StudentActivityFormsService service;
 
     @PostMapping
