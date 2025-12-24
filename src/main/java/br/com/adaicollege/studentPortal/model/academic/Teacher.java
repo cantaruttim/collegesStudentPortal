@@ -2,7 +2,10 @@ package br.com.adaicollege.studentPortal.model.academic;
 
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+
+@Document
 public class Teacher {
 
     @Id
