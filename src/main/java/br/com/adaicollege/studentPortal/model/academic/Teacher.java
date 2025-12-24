@@ -12,7 +12,7 @@ public class Teacher {
     private String id;
     private String firstName;
     private String familyName;
-    private Modules moduleName;
+    private String moduleName;
     private CollegeCourse courseLectures;
 
     public Teacher() {}
@@ -41,11 +41,11 @@ public class Teacher {
         this.familyName = familyName;
     }
 
-    public Modules getModuleName() {
+    public String getModuleName() {
         return moduleName;
     }
 
-    public void setModuleName(Modules moduleName) {
+    public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
 

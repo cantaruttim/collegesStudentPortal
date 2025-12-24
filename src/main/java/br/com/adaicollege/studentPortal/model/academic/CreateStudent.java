@@ -20,7 +20,7 @@ public class CreateStudent {
     private String email;
     private LocalDate birthDate;
     private CollegeCourse courseEnrolled;
-    private Modules moduleName; // first modulo enrolled (could be chosen after)
+    private String moduleName; // first modulo enrolled (could be chosen after)
     private StudentStatus studentStatus; // active or not
 
     private LocalDateTime enrolledAt;
@@ -83,11 +83,11 @@ public class CreateStudent {
         this.courseEnrolled = courseEnrolled;
     }
 
-    public Modules getModuleName() {
+    public String getModuleName() {
         return moduleName;
     }
 
-    public void setModuleName(Modules moduleName) {
+    public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
 

@@ -8,7 +8,7 @@ public class TeacherDTO {
     private String id;
     private String firstName;
     private String familyName;
-    private Modules moduleName;
+    private String moduleName;
     private CollegeCourse courseLectures;
 
     public TeacherDTO() {}
@@ -37,11 +37,11 @@ public class TeacherDTO {
         this.familyName = familyName;
     }
 
-    public Modules getModuleName() {
+    public String getModuleName() {
         return moduleName;
     }
 
-    public void setModuleName(Modules moduleName) {
+    public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
 

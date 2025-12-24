@@ -13,7 +13,7 @@ public class Modules {
     private String id;
     private String moduleName;
     private String moduleDescription;
-    private Teacher teacherName;
+    private String teacherName;
     private CollegeCourse course;
     private Integer quantityClasses;
     private LocalDate startDate;
@@ -45,11 +45,11 @@ public class Modules {
         this.moduleDescription = moduleDescription;
     }
 
-    public Teacher getTeacherName() {
+    public String getTeacherName() {
         return teacherName;
     }
 
-    public void setTeacherName(Teacher teacherName) {
+    public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
     }
 
