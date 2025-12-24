@@ -1,20 +1,22 @@
 package br.com.adaicollege.studentPortal.data.formsDTO;
 
-import br.com.adaicollege.studentPortal.model.academic.Modules;
-import br.com.adaicollege.studentPortal.model.academic.Teacher;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
+
+@Document
 public class StudentsActivityFormsDTO {
 
-    // @Id
+    @Id
     private String id;
     private String registrationNumber;
     private String fullName;
     private String email;
 
-    private Modules moduleId;
-    private Teacher teacherId;
+    private String moduleId;
+    private String teacherId;
 
     private String firstQuestion;
     private String secondQuestion;
@@ -55,19 +57,19 @@ public class StudentsActivityFormsDTO {
         this.email = email;
     }
 
-    public Modules getModuleId() {
+    public String getModuleId() {
         return moduleId;
     }
 
-    public void setModuleId(Modules moduleId) {
+    public void setModuleId(String moduleId) {
         this.moduleId = moduleId;
     }
 
-    public Teacher getTeacherId() {
+    public String getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(Teacher teacherId) {
+    public void setTeacherId(String teacherId) {
         this.teacherId = teacherId;
     }
 

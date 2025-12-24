@@ -1,6 +1,5 @@
 package br.com.adaicollege.studentPortal.data.academicDTO;
 
-import br.com.adaicollege.studentPortal.model.academic.Modules;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 
 public class TeacherDTO {

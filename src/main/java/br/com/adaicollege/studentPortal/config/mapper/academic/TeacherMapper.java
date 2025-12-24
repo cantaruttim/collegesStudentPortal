@@ -24,7 +24,7 @@ public class TeacherMapper {
         teacher.setId(dto.getId());
         teacher.setFirstName(dto.getFirstName());
         teacher.setFamilyName(dto.getFamilyName());
-        teacher.setModuleName(dto.getModuleName());
+        teacher.setModuleNameId(dto.getModuleName());
         teacher.setCourseLectures(dto.getCourseLectures());
 
         return teacher;
@@ -41,7 +41,7 @@ public class TeacherMapper {
         dto.setId(teacher.getId());
         dto.setFirstName(teacher.getFirstName());
         dto.setFamilyName(teacher.getFamilyName());
-        dto.setModuleName(teacher.getModuleName());
+        dto.setModuleName(teacher.getModuleNameId());
         dto.setCourseLectures(teacher.getCourseLectures());
 
         return dto;

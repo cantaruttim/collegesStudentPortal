@@ -72,7 +72,7 @@ public class TeacherService {
         
         teacher.setFirstName(dto.getFirstName());
         teacher.setFamilyName(dto.getFamilyName());
-        teacher.setModuleName(dto.getModuleName());
+        teacher.setModuleNameId(dto.getModuleName());
         teacher.setCourseLectures(dto.getCourseLectures());
 
         Teacher updated = teacherRepo.save(teacher);

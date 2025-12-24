@@ -32,7 +32,7 @@ public class CreateStudentMapper {
         student.setEmail(dto.getEmail());
         student.setBirthDate(dto.getBirthDate());
         student.setCourseEnrolled(dto.getCourseEnrolled());
-        student.setModuleName(dto.getModuleName());
+        student.setModuleNameId(dto.getModuleNameId());
         student.setStudentStatus(dto.getStudentStatus());
         student.setEnrolledAt(dto.getEnrolledAt());
 
@@ -55,7 +55,7 @@ public class CreateStudentMapper {
         dto.setEmail(student.getEmail());
         dto.setBirthDate(student.getBirthDate());
         dto.setCourseEnrolled(student.getCourseEnrolled());
-        dto.setModuleName(student.getModuleName());
+        dto.setModuleNameId(student.getModuleNameId());
         dto.setStudentStatus(student.getStudentStatus());
         dto.setEnrolledAt(student.getEnrolledAt());
 

@@ -4,7 +4,6 @@ import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
 @Document
 public class Teacher {
 
@@ -12,7 +11,7 @@ public class Teacher {
     private String id;
     private String firstName;
     private String familyName;
-    private String moduleName;
+    private String moduleNameId;
     private CollegeCourse courseLectures;
 
     public Teacher() {}
@@ -41,12 +40,12 @@ public class Teacher {
         this.familyName = familyName;
     }
 
-    public String getModuleName() {
-        return moduleName;
+    public String getModuleNameId() {
+        return moduleNameId;
     }
 
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
+    public void setModuleNameId(String moduleNameId) {
+        this.moduleNameId = moduleNameId;
     }
 
     public CollegeCourse getCourseLectures() {

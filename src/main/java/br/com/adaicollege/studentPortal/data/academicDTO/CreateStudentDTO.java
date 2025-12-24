@@ -1,6 +1,5 @@
 package br.com.adaicollege.studentPortal.data.academicDTO;
 
-import br.com.adaicollege.studentPortal.model.academic.Modules;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 
@@ -17,7 +16,7 @@ public class CreateStudentDTO {
     private String email;
     private LocalDate birthDate;
     private CollegeCourse courseEnrolled;
-    private Modules moduleName; // first modulo enrolled (could be chosen after)
+    private String moduleNameId; // first modulo enrolled (could be chosen after)
     private StudentStatus studentStatus; // active or not
 
     private LocalDateTime enrolledAt;
@@ -80,12 +79,12 @@ public class CreateStudentDTO {
         this.courseEnrolled = courseEnrolled;
     }
 
-    public Modules getModuleName() {
-        return moduleName;
+    public String getModuleNameId() {
+        return moduleNameId;
     }
 
-    public void setModuleName(Modules moduleName) {
-        this.moduleName = moduleName;
+    public void setModuleNameId(String moduleNameId) {
+        this.moduleNameId = moduleNameId;
     }
 
     public StudentStatus getStudentStatus() {
