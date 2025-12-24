@@ -72,28 +72,13 @@ public class StudentActivityFormsService {
                         )
                 );
 
-        // Dados básicos
-
         activity.setId(dto.getId());
         activity.setRegistrationNumber(dto.getRegistrationNumber());
         activity.setFullName(dto.getFullName());
         activity.setEmail(dto.getEmail());
         activity.setFirstQuestion(dto.getFirstQuestion());
         activity.setSecondQuestion(dto.getSecondQuestion());
-
-        if (activity.getModuleId() == null) {
-            activity.setModuleId(new Modules());
-        }
-
-        if (dto.getModuleId() != null) {
-            activity.getModuleId().setModuleName(dto.getModuleId().getModuleName());
-            activity.getModuleId().setModuleDescription(dto.getModuleId().getModuleDescription());
-            activity.getModuleId().setCourse(dto.getModuleId().getCourse());
-            activity.getModuleId().setStartDate(dto.getModuleId().getStartDate());
-            activity.getModuleId().setEndDate(dto.getModuleId().getEndDate());
-            activity.getModuleId().setTeacherName(dto.getModuleId().getTeacherName());
-            activity.getModuleId().setQuantityClasses(dto.getModuleId().getQuantityClasses());
-        }
+        activity.setModuleId(dto.getModuleId());
 
         StudentsActivityForms updated = activityFormsRepo.save(activity);
         return StudentsActivityFormsMapper.toDTO(updated);
