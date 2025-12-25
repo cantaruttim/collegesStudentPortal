@@ -1,6 +1,7 @@
 package br.com.adaicollege.studentPortal.service.login;
 
 import br.com.adaicollege.studentPortal.config.security.auth.MyToken;
+import br.com.adaicollege.studentPortal.config.utils.TokenUtil;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,8 +33,7 @@ public class UserLoginService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         if (encoder.matches(user.getStudentPassword(), storedUser.getStudentPassword())) {
-            return new MyToken("security123");
-            // return TokenUtil.encode(storedUser);
+             return TokenUtil.encode(storedUser);
         }
 
         throw new RuntimeException("Unauthorized user!");
