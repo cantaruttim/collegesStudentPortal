@@ -1,24 +1,57 @@
 package br.com.adaicollege.studentPortal.service.academic;
 
 import br.com.adaicollege.studentPortal.config.mapper.academic.CreateStudentMapper;
+import br.com.adaicollege.studentPortal.config.utils.PasswordUtils;
+import br.com.adaicollege.studentPortal.config.utils.StudentNumber;
 import br.com.adaicollege.studentPortal.data.academicDTO.CreateStudentDTO;
 import br.com.adaicollege.studentPortal.model.academic.CreateStudent;
+import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
+import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.repository.academic.CreateStudentRepository;
+import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class CreateStudentService {
 
     private final CreateStudentRepository repo;
+    private final UserLoginRepository userRepo;
 
-    public CreateStudentService(CreateStudentRepository repo) {
+    public CreateStudentService(CreateStudentRepository repo, UserLoginRepository userRepo) {
         this.repo = repo;
+        this.userRepo = userRepo;
     }
 
+    private void createUserLogin(CreateStudent student) {
+
+        student.setId(null);
+        student.setEnrolledAt(LocalDateTime.now());
+        student.setStudentStatus(StudentStatus.ACTIVE);
+
+        CreateStudent savedStudent = repo.save(student);
+
+        String registrationNumber =
+                StudentNumber.defaultStudentNumber(
+                        savedStudent.getSocialSecurityNumber()
+                );
+
+        String password =
+                PasswordUtils.defaultPassword(
+                        savedStudent.getSocialSecurityNumber(),
+                        savedStudent.getCourseEnrolled().name()
+                );
+
+        UserLogin user = new UserLogin();
+        user.setRegistrationNumber(registrationNumber);
+        user.setStudentPassword(password);
+        user.setStudentId(savedStudent.getId());
+
+    }
 
     // -------------------------------------------------------------
     // CREATE
@@ -26,10 +59,16 @@ public class CreateStudentService {
     public CreateStudentDTO save(CreateStudentDTO dto) {
 
         CreateStudent student = CreateStudentMapper.toEntity(dto);
-        student.setId(null); // Mongo gera o ID
+        student.setId(null);
+        student.setEnrolledAt(LocalDateTime.now());
+        student.setStudentStatus(StudentStatus.ACTIVE);
 
-        CreateStudent saved = repo.save(student);
-        return CreateStudentMapper.toDTO(saved);
+        CreateStudent savedStudent = repo.save(student);
+
+        createUserLogin(savedStudent);
+
+        return CreateStudentMapper.toDTO(savedStudent);
+
     }
 
     // -------------------------------------------------------------

@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.config.security.Auth;
+package br.com.adaicollege.studentPortal.config.security.auth;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,7 +1,5 @@
-package br.com.adaicollege.studentPortal.config.security.Auth;
+package br.com.adaicollege.studentPortal.config.security.auth;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 //import org.springframework.security.web.SecurityFilterChain;
