@@ -1,12 +1,17 @@
 package br.com.adaicollege.studentPortal.controller.auth;
 
 
+import br.com.adaicollege.studentPortal.config.security.auth.MyToken;
+import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.service.login.UserLoginService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/student-login")
+@RequestMapping
 public class UserLoginController {
 
     private final UserLoginService service;
@@ -15,10 +20,8 @@ public class UserLoginController {
         this.service = service;
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<MyToken> login(@RequestBody UserLogin user) {
-//        MyToken token = service.userLogin(user);
-//        return ResponseEntity.ok(token);
-//    }
-
+    @PostMapping("/user-login")
+    public ResponseEntity<MyToken> login(@RequestBody UserLogin user) {
+        return ResponseEntity.ok(service.userLogin(user));
+    }
 }
