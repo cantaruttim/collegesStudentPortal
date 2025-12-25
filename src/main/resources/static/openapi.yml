@@ -1,0 +1,342 @@
+openapi: 3.0.3
+
+info:
+  title: Student Portal API
+  description: API for managing students, teachers, modules and student activity forms
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+tags:
+  - name: Students
+    description: Operations related to student management
+  - name: Modules
+    description: Operations related to academic modules
+  - name: Teachers
+    description: Operations related to teacher management
+  - name: Student Activities
+    description: Operations related to student activity forms
+
+paths:
+
+  /api/v1/create-student:
+    post:
+      tags:
+        - Students
+      summary: Create a new student
+      description: Creates a new student and returns the created student data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudentDTO'
+      responses:
+        '201':
+          description: Student successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStudentDTO'
+        '400':
+          description: Invalid student data
+        '409':
+          description: Student already exists
+
+    get:
+      tags:
+        - Students
+      summary: List all students
+      description: Returns a list of all registered students
+      responses:
+        '200':
+          description: List of students returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateStudentDTO'
+
+  /api/v1/create-student/{id}:
+    get:
+      tags:
+        - Students
+      summary: Get student by ID
+      description: Returns the student identified by the given ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Student found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStudentDTO'
+        '404':
+          description: Student not found
+
+    put:
+      tags:
+        - Students
+      summary: Update a student
+      description: Updates the student identified by the given ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudentDTO'
+      responses:
+        '200':
+          description: Student successfully updated
+        '404':
+          description: Student not found
+
+    delete:
+      tags:
+        - Students
+      summary: Delete a student
+      description: Deletes the student identified by the given ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Student successfully deleted
+        '404':
+          description: Student not found
+
+  /api/v1/create-module:
+    post:
+      tags:
+        - Modules
+      summary: Create a new module
+      description: Creates a new academic module
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModulesDTO'
+      responses:
+        '201':
+          description: Module successfully created
+
+    get:
+      tags:
+        - Modules
+      summary: List all modules
+      description: Returns all academic modules
+      responses:
+        '200':
+          description: List of modules returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ModulesDTO'
+
+  /api/v1/create-module/{id}:
+    get:
+      tags:
+        - Modules
+      summary: Get module by ID
+      description: Returns a module by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Module found
+        '404':
+          description: Module not found
+
+    put:
+      tags:
+        - Modules
+      summary: Update a module
+      description: Updates an existing module
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Module successfully updated
+
+    delete:
+      tags:
+        - Modules
+      summary: Delete a module
+      description: Deletes a module by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Module successfully deleted
+
+  /api/v1/create-teacher:
+    post:
+      tags:
+        - Teachers
+      summary: Create a new teacher
+      description: Creates a new teacher
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeacherDTO'
+      responses:
+        '201':
+          description: Teacher successfully created
+
+    get:
+      tags:
+        - Teachers
+      summary: List all teachers
+      description: Returns all registered teachers
+      responses:
+        '200':
+          description: List of teachers returned successfully
+
+  /api/v1/create-teacher/{id}:
+    get:
+      tags:
+        - Teachers
+      summary: Get teacher by ID
+      description: Returns a teacher by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Teacher found
+        '404':
+          description: Teacher not found
+
+    put:
+      tags:
+        - Teachers
+      summary: Update a teacher
+      description: Updates an existing teacher
+      parameters:
+        - name: id
+          in: path
+          required: true
+      responses:
+        '200':
+          description: Teacher successfully updated
+
+    delete:
+      tags:
+        - Teachers
+      summary: Delete a teacher
+      description: Deletes a teacher by its ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+      responses:
+        '204':
+          description: Teacher successfully deleted
+
+  /api/v1/student-class-activity-response:
+    post:
+      tags:
+        - Student Activities
+      summary: Create a student activity response
+      description: Creates a new student activity form response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudentsActivityFormsDTO'
+      responses:
+        '201':
+          description: Activity response successfully created
+
+    get:
+      tags:
+        - Student Activities
+      summary: List all student activity responses
+      description: Returns all student activity form responses
+      responses:
+        '200':
+          description: List of activity responses returned successfully
+
+components:
+  schemas:
+
+    CreateStudentDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "64f1c9b8a9c2a"
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          example: "john.doe@email.com"
+
+    ModulesDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "mod123"
+        name:
+          type: string
+          example: "Software Engineering"
+
+    TeacherDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "teacher123"
+        name:
+          type: string
+          example: "Jane Smith"
+
+    StudentsActivityFormsDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "activity123"
+        description:
+          type: string
+          example: "Class activity response"

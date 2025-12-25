@@ -3,6 +3,14 @@ spring:
     mongodb:
       uri: ${SPRING_DATA_MONGODB_URI:mongodb://localhost:27017/student_portal}
 
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    url: /openapi.yml
+
 logging:
   level:
     org.springframework.data.mongodb.core.MongoTemplate: DEBUG
