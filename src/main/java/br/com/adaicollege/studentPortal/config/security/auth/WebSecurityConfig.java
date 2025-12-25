@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -17,9 +18,11 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
 
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
-                )
+                .authorizeHttpRequests( (auth) -> {
+                            auth.requestMatchers(new AntPathRequestMatcher("/user-login", "GET")).authenticated()
+                                    .anyRequest().permitAll();
+
+                    })
 
                 .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable());
