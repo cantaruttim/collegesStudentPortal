@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.config.mapper;
+package br.com.adaicollege.studentPortal.config.exceptions;
 
 
 import org.springframework.http.HttpStatus;

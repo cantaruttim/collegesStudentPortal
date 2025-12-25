@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.service.academic;
 
-import br.com.adaicollege.studentPortal.config.mapper.StudentAlreadyExistsException;
+import br.com.adaicollege.studentPortal.config.exceptions.StudentAlreadyExistsException;
 import br.com.adaicollege.studentPortal.config.mapper.academic.CreateStudentMapper;
 import br.com.adaicollege.studentPortal.config.utils.PasswordUtils;
 import br.com.adaicollege.studentPortal.config.utils.StudentNumber;
