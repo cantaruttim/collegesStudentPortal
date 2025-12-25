@@ -10,4 +10,9 @@ public interface CreateStudentRepository
             CreateStudent,
             String
         > {
+
+    boolean existsBySocialSecurityNumber(String socialSecurityNumber);
+
+    boolean existsByEmail(String email);
+
 }

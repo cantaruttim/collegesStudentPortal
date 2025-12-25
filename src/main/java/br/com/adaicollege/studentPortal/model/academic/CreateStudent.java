@@ -3,6 +3,7 @@ package br.com.adaicollege.studentPortal.model.academic;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -14,9 +15,12 @@ public class CreateStudent {
     @Id
     private String id;
 
+    @Indexed(unique = true)
     private String socialSecurityNumber;
     private String firstName;
     private String familyName;
+
+    @Indexed(unique = true)
     private String email;
     private LocalDate birthDate;
     private CollegeCourse courseEnrolled;

@@ -1,5 +1,6 @@
 package br.com.adaicollege.studentPortal.service.academic;
 
+import br.com.adaicollege.studentPortal.config.mapper.StudentAlreadyExistsException;
 import br.com.adaicollege.studentPortal.config.mapper.academic.CreateStudentMapper;
 import br.com.adaicollege.studentPortal.config.utils.PasswordUtils;
 import br.com.adaicollege.studentPortal.config.utils.StudentNumber;
@@ -9,6 +10,7 @@ import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.repository.academic.CreateStudentRepository;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
+import com.mongodb.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,11 +24,14 @@ public class CreateStudentService {
 
     private final CreateStudentRepository repo;
     private final UserLoginRepository userRepo;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public CreateStudentService(CreateStudentRepository repo, UserLoginRepository userRepo) {
+    public CreateStudentService(CreateStudentRepository repo,
+                                UserLoginRepository userRepo,
+                                PasswordEncoder passwordEncoder) {
         this.repo = repo;
         this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     private void createUserLogin(CreateStudent student) {
@@ -55,6 +60,8 @@ public class CreateStudentService {
         user.setStudentPassword(encryptedPassword);
         user.setStudentId(savedStudent.getId());
 
+        userRepo.save(user);
+
     }
 
     // -------------------------------------------------------------
@@ -62,17 +69,35 @@ public class CreateStudentService {
     // -------------------------------------------------------------
     public CreateStudentDTO save(CreateStudentDTO dto) {
 
-        CreateStudent student = CreateStudentMapper.toEntity(dto);
-        student.setId(null);
-        student.setEnrolledAt(LocalDateTime.now());
-        student.setStudentStatus(StudentStatus.ACTIVE);
+        if (repo.existsBySocialSecurityNumber(dto.getSocialSecurityNumber())) {
+            throw new StudentAlreadyExistsException(
+                    "Student already exists with this SSN"
+            );
+        }
 
-        CreateStudent savedStudent = repo.save(student);
+        if (repo.existsByEmail(dto.getEmail())) {
+            throw new StudentAlreadyExistsException(
+                    "Student already exists with this email"
+            );
+        }
 
-        createUserLogin(savedStudent);
+        try {
+            CreateStudent student = CreateStudentMapper.toEntity(dto);
+            student.setId(null);
+            student.setEnrolledAt(LocalDateTime.now());
+            student.setStudentStatus(StudentStatus.ACTIVE);
 
-        return CreateStudentMapper.toDTO(savedStudent);
+            CreateStudent savedStudent = repo.save(student);
 
+            createUserLogin(savedStudent);
+
+            return CreateStudentMapper.toDTO(savedStudent);
+
+        } catch (DuplicateKeyException ex) {
+            throw new StudentAlreadyExistsException(
+                    "Student already exists (duplicate key)"
+            );
+        }
     }
 
     // -------------------------------------------------------------
