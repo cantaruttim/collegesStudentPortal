@@ -10,6 +10,7 @@ import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.repository.academic.CreateStudentRepository;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,6 +22,7 @@ public class CreateStudentService {
 
     private final CreateStudentRepository repo;
     private final UserLoginRepository userRepo;
+    private PasswordEncoder passwordEncoder;
 
     public CreateStudentService(CreateStudentRepository repo, UserLoginRepository userRepo) {
         this.repo = repo;
@@ -40,15 +42,17 @@ public class CreateStudentService {
                         savedStudent.getSocialSecurityNumber()
                 );
 
-        String password =
+        String rawPassword =
                 PasswordUtils.defaultPassword(
                         savedStudent.getSocialSecurityNumber(),
                         savedStudent.getCourseEnrolled().name()
                 );
 
+        String encryptedPassword = passwordEncoder.encode(rawPassword);
+
         UserLogin user = new UserLogin();
         user.setRegistrationNumber(registrationNumber);
-        user.setStudentPassword(password);
+        user.setStudentPassword(encryptedPassword);
         user.setStudentId(savedStudent.getId());
 
     }
