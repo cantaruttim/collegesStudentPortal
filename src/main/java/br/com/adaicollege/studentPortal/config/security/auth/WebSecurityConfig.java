@@ -20,6 +20,10 @@ public class WebSecurityConfig {
 
                 .authorizeHttpRequests( (auth) -> {
                             auth.requestMatchers(new AntPathRequestMatcher("/student-login", "POST")).authenticated()
+                                .requestMatchers(new AntPathRequestMatcher("/api/v1/create-student", "GET")).authenticated()
+                                .requestMatchers(new AntPathRequestMatcher("/api/v1/create-module", "GET")).authenticated()
+                                .requestMatchers(new AntPathRequestMatcher("/api/v1/create-teacher", "GET")).authenticated()
+
                                     .anyRequest().permitAll();
 
                     })
