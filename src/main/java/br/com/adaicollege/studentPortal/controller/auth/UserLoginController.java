@@ -1,6 +1,5 @@
 package br.com.adaicollege.studentPortal.controller.auth;
 
-
 import br.com.adaicollege.studentPortal.config.security.auth.MyToken;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.service.login.UserLoginService;

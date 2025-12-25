@@ -36,7 +36,7 @@ public class UserLoginService {
             // return TokenUtil.encode(storedUser);
         }
 
-        throw new RuntimeException("Unauthorized!");
+        throw new RuntimeException("Unauthorized user!");
     }
 
 }
