@@ -19,12 +19,15 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests( (auth) -> {
-                            auth.requestMatchers(new AntPathRequestMatcher("/user-login", "POST")).authenticated()
-                                .requestMatchers(new AntPathRequestMatcher("/api/v1/create-student", "GET")).authenticated()
-                                .requestMatchers(new AntPathRequestMatcher("/api/v1/create-module", "GET")).authenticated()
-                                .requestMatchers(new AntPathRequestMatcher("/api/v1/create-teacher", "GET")).authenticated()
 
-                                    .anyRequest().permitAll();
+                        // PUBLIC
+                    auth.requestMatchers(new AntPathRequestMatcher("/user-login", "POST")).permitAll()
+                        // PROTECTED ENDPOINTS
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/create-student", "GET")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/create-module", "GET")).authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/api/v1/create-teacher", "GET")).authenticated()
+
+                        .anyRequest().permitAll();
 
                     })
 

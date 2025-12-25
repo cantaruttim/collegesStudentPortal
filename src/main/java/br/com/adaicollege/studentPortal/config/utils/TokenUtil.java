@@ -29,7 +29,7 @@ public class TokenUtil {
             String header = request.getHeader("Authorization");
 
             if (header != null) {
-                String token = header.replace("Bearer", "");
+                String token = header.replace("Bearer", "").trim();
 
                 if (token.equals("security123")) {
                     return new UsernamePasswordAuthenticationToken("Valid", null, Collections.emptyList());
