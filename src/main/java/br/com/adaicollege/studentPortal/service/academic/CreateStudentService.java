@@ -1,7 +1,6 @@
 package br.com.adaicollege.studentPortal.service.academic;
 
 import br.com.adaicollege.studentPortal.config.exceptions.StudentAlreadyExistsException;
-import br.com.adaicollege.studentPortal.config.mapper.academic.CreateStudentMapper;
 import br.com.adaicollege.studentPortal.config.utils.PasswordUtils;
 import br.com.adaicollege.studentPortal.config.utils.StudentNumber;
 import br.com.adaicollege.studentPortal.data.academicDTO.CreateStudentDTO;
@@ -34,13 +33,10 @@ public class CreateStudentService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    private void createUserLogin(CreateStudent student) {
-
-        student.setId(null);
-        student.setEnrolledAt(LocalDateTime.now());
-        student.setStudentStatus(StudentStatus.ACTIVE);
-
-        CreateStudent savedStudent = repo.save(student);
+    // -------------------------------------------------------------
+    // AUX: CREATE USER LOGIN
+    // -------------------------------------------------------------
+    private void createUserLogin(CreateStudent savedStudent) {
 
         String registrationNumber =
                 StudentNumber.defaultStudentNumber(
@@ -61,7 +57,6 @@ public class CreateStudentService {
         user.setStudentId(savedStudent.getId());
 
         userRepo.save(user);
-
     }
 
     // -------------------------------------------------------------
@@ -69,20 +64,21 @@ public class CreateStudentService {
     // -------------------------------------------------------------
     public CreateStudentDTO save(CreateStudentDTO dto) {
 
-        if (repo.existsBySocialSecurityNumber(dto.getSocialSecurityNumber())) {
+        if (repo.existsBySocialSecurityNumber(dto.socialSecurityNumber())) {
             throw new StudentAlreadyExistsException(
                     "Student already exists with this SSN"
             );
         }
 
-        if (repo.existsByEmail(dto.getEmail())) {
+        if (repo.existsByEmail(dto.email())) {
             throw new StudentAlreadyExistsException(
                     "Student already exists with this email"
             );
         }
 
         try {
-            CreateStudent student = CreateStudentMapper.toEntity(dto);
+            CreateStudent student = CreateStudent.from(dto);
+
             student.setId(null);
             student.setEnrolledAt(LocalDateTime.now());
             student.setStudentStatus(StudentStatus.ACTIVE);
@@ -91,7 +87,7 @@ public class CreateStudentService {
 
             createUserLogin(savedStudent);
 
-            return CreateStudentMapper.toDTO(savedStudent);
+            return new CreateStudentDTO(savedStudent);
 
         } catch (DuplicateKeyException ex) {
             throw new StudentAlreadyExistsException(
@@ -106,7 +102,7 @@ public class CreateStudentService {
     public List<CreateStudentDTO> listAll() {
         return repo.findAll()
                 .stream()
-                .map(CreateStudentMapper::toDTO)
+                .map(CreateStudentDTO::new)
                 .toList();
     }
 
@@ -115,15 +111,15 @@ public class CreateStudentService {
     // -------------------------------------------------------------
     public CreateStudentDTO findById(String id) {
 
-        CreateStudent mod = repo.findById(id)
+        CreateStudent student = repo.findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "Employee not found: " + id
+                                "Student not found: " + id
                         )
                 );
 
-        return CreateStudentMapper.toDTO(mod);
+        return new CreateStudentDTO(student);
     }
 
     // -------------------------------------------------------------
@@ -135,15 +131,19 @@ public class CreateStudentService {
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "Employee not found: " + id
+                                "Student not found: " + id
                         )
                 );
 
-        student.setFirstName(dto.getFirstName());
-        // IMPLEMENTS!
+        student.setFirstName(dto.firstName());
+        student.setFamilyName(dto.familyName());
+        student.setEmail(dto.email());
+        student.setBirthDate(dto.birthDate());
+        student.setCourseEnrolled(dto.courseEnrolled());
+        student.setModuleNameId(dto.moduleNameId());
 
         CreateStudent updated = repo.save(student);
-        return CreateStudentMapper.toDTO(updated);
+        return new CreateStudentDTO(updated);
     }
 
     // -------------------------------------------------------------
@@ -154,12 +154,10 @@ public class CreateStudentService {
         if (!repo.existsById(id)) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    "Employee not found: " + id
+                    "Student not found: " + id
             );
         }
 
         repo.deleteById(id);
     }
-
-
 }

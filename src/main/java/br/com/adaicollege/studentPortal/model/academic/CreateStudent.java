@@ -1,5 +1,6 @@
 package br.com.adaicollege.studentPortal.model.academic;
 
+import br.com.adaicollege.studentPortal.data.academicDTO.CreateStudentDTO;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import org.springframework.data.annotation.Id;
@@ -8,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Document(collection = "student_register")
 public class CreateStudent {
@@ -110,4 +112,32 @@ public class CreateStudent {
     public void setEnrolledAt(LocalDateTime enrolledAt) {
         this.enrolledAt = enrolledAt;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof CreateStudent that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getSocialSecurityNumber(), that.getSocialSecurityNumber()) && Objects.equals(getFirstName(), that.getFirstName()) && Objects.equals(getFamilyName(), that.getFamilyName()) && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getBirthDate(), that.getBirthDate()) && getCourseEnrolled() == that.getCourseEnrolled() && Objects.equals(getModuleNameId(), that.getModuleNameId()) && getStudentStatus() == that.getStudentStatus() && Objects.equals(getEnrolledAt(), that.getEnrolledAt());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getSocialSecurityNumber(), getFirstName(), getFamilyName(), getEmail(), getBirthDate(), getCourseEnrolled(), getModuleNameId(), getStudentStatus(), getEnrolledAt());
+    }
+
+    public static CreateStudent from(CreateStudentDTO dto) {
+        CreateStudent student = new CreateStudent();
+        student.setId(dto.id());
+        student.setSocialSecurityNumber(dto.socialSecurityNumber());
+        student.setFirstName(dto.firstName());
+        student.setFamilyName(dto.familyName());
+        student.setEmail(dto.email());
+        student.setBirthDate(dto.birthDate());
+        student.setCourseEnrolled(dto.courseEnrolled());
+        student.setModuleNameId(dto.moduleNameId());
+        student.setStudentStatus(dto.studentStatus());
+        student.setEnrolledAt(dto.enrolledAt());
+
+        return student;
+    }
+
 }

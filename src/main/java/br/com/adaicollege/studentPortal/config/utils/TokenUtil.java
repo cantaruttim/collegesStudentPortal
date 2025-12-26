@@ -18,6 +18,7 @@ import java.util.Date;
 
 public class TokenUtil {
 
+    // put on an env file
     public static final String EMISSOR = "ADAI_COLLEGE";
     public static final long EXPIRATION = 60 * 60 * 1000;
     public static final String SECRET_KEY = "0123456789012345678901234567890123456789";
@@ -61,9 +62,7 @@ public class TokenUtil {
                 if (issuer.equals(EMISSOR) && subject.length() > 0 && exp.after(new Date(System.currentTimeMillis()))) {
                     return new UsernamePasswordAuthenticationToken("Valid", null, Collections.emptyList());
                 }
-
             }
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
