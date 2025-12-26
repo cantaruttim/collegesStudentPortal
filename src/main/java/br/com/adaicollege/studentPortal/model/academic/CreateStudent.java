@@ -1,6 +1,7 @@
 package br.com.adaicollege.studentPortal.model.academic;
 
 import br.com.adaicollege.studentPortal.data.academicDTO.CreateStudentDTO;
+import br.com.adaicollege.studentPortal.data.academicDTO.student.CreateStudentRequest;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import org.springframework.data.annotation.Id;
@@ -124,20 +125,15 @@ public class CreateStudent {
         return Objects.hash(getId(), getSocialSecurityNumber(), getFirstName(), getFamilyName(), getEmail(), getBirthDate(), getCourseEnrolled(), getModuleNameId(), getStudentStatus(), getEnrolledAt());
     }
 
-    public static CreateStudent from(CreateStudentDTO dto) {
+    public static CreateStudent from(CreateStudentRequest req) {
         CreateStudent student = new CreateStudent();
-        student.setId(dto.id());
-        student.setSocialSecurityNumber(dto.socialSecurityNumber());
-        student.setFirstName(dto.firstName());
-        student.setFamilyName(dto.familyName());
-        student.setEmail(dto.email());
-        student.setBirthDate(dto.birthDate());
-        student.setCourseEnrolled(dto.courseEnrolled());
-        student.setModuleNameId(dto.moduleNameId());
-        student.setStudentStatus(dto.studentStatus());
-        student.setEnrolledAt(dto.enrolledAt());
-
+        student.setSocialSecurityNumber(req.socialSecurityNumber());
+        student.setFirstName(req.firstName());
+        student.setFamilyName(req.familyName());
+        student.setEmail(req.email());
+        student.setBirthDate(req.birthDate());
+        student.setCourseEnrolled(req.courseEnrolled());
+        student.setModuleNameId(req.moduleNameId());
         return student;
     }
-
 }

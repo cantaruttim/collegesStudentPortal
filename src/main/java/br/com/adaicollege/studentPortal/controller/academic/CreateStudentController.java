@@ -1,56 +1,50 @@
 package br.com.adaicollege.studentPortal.controller.academic;
 
-import br.com.adaicollege.studentPortal.data.academicDTO.CreateStudentDTO;
-import br.com.adaicollege.studentPortal.service.academic.CreateStudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.adaicollege.studentPortal.data.academicDTO.student.CreateStudentRequest;
+import br.com.adaicollege.studentPortal.data.academicDTO.student.UpdateStudentRequest;
+import br.com.adaicollege.studentPortal.data.academicDTO.student.StudentResponse;
+import br.com.adaicollege.studentPortal.service.academic.student.CreateStudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/create-student")
+@RequestMapping("/api/v1/students")
 public class CreateStudentController {
 
-    @Autowired
-    private CreateStudentService service;
+    private final CreateStudentService service;
+
+    public CreateStudentController(CreateStudentService service) {
+        this.service = service;
+    }
 
     @PostMapping
-    public ResponseEntity<CreateStudentDTO> create(
-            @RequestBody CreateStudentDTO dto
+    public ResponseEntity<StudentResponse> create(
+            @RequestBody CreateStudentRequest request
     ) {
-        dto.setId(null);
-        CreateStudentDTO saved = service.save(dto);
+        StudentResponse saved = service.create(request);
         return ResponseEntity.status(201).body(saved);
     }
 
     @GetMapping
-    public ResponseEntity<List<CreateStudentDTO>> listAll() {
+    public ResponseEntity<List<StudentResponse>> listAll() {
         return ResponseEntity.ok(service.listAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CreateStudentDTO> getById(
+    public ResponseEntity<StudentResponse> getById(
             @PathVariable String id
     ) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CreateStudentDTO> update(
+    public ResponseEntity<StudentResponse> update(
             @PathVariable String id,
-            @RequestBody CreateStudentDTO dto
+            @RequestBody UpdateStudentRequest request
     ) {
-        return ResponseEntity.ok(service.update(id, dto));
+        return ResponseEntity.ok(service.update(id, request));
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(
-            @PathVariable String id
-    ) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
 
 }
