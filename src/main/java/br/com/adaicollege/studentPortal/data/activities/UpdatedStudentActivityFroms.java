@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.data.forms.activities;
+package br.com.adaicollege.studentPortal.data.activities;
 
 public record UpdatedStudentActivityFroms(
 

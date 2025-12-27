@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.data.loginDTO;
+package br.com.adaicollege.studentPortal.data.login;
 
 public class UserLoginDTO {
 

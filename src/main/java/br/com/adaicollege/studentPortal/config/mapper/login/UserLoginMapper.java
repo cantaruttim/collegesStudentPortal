@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.config.mapper.login;
 
-import br.com.adaicollege.studentPortal.data.loginDTO.UserLoginDTO;
+import br.com.adaicollege.studentPortal.data.login.UserLoginDTO;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 
 public class UserLoginMapper {

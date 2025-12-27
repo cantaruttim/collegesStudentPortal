@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.controller.academic;
 
-import br.com.adaicollege.studentPortal.data.academic.ModulesDTO;
-import br.com.adaicollege.studentPortal.service.academic.ModulesService;
+import br.com.adaicollege.studentPortal.data.academic.secretary.ModulesDTO;
+import br.com.adaicollege.studentPortal.service.academic.secretary.ModulesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
