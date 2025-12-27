@@ -1,6 +1,5 @@
 package br.com.adaicollege.studentPortal.model.academic;
 
-import br.com.adaicollege.studentPortal.data.academicDTO.CreateStudentDTO;
 import br.com.adaicollege.studentPortal.data.academicDTO.student.CreateStudentRequest;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;

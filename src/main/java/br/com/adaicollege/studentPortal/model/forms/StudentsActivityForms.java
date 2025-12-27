@@ -1,9 +1,11 @@
 package br.com.adaicollege.studentPortal.model.forms;
 
+import br.com.adaicollege.studentPortal.data.formsDTO.activities.StudentsActivityFormRequest;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @Document
@@ -97,4 +99,28 @@ public class StudentsActivityForms {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof StudentsActivityForms that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getRegistrationNumber(), that.getRegistrationNumber()) && Objects.equals(getFullName(), that.getFullName()) && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getModuleId(), that.getModuleId()) && Objects.equals(getTeacherId(), that.getTeacherId()) && Objects.equals(getFirstQuestion(), that.getFirstQuestion()) && Objects.equals(getSecondQuestion(), that.getSecondQuestion()) && Objects.equals(getCreatedAt(), that.getCreatedAt());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getRegistrationNumber(), getFullName(), getEmail(), getModuleId(), getTeacherId(), getFirstQuestion(), getSecondQuestion(), getCreatedAt());
+    }
+
+    public static StudentsActivityForms from(StudentsActivityFormRequest req) {
+        StudentsActivityForms forms = new StudentsActivityForms();
+        forms.setRegistrationNumber(req.registrationNumber());
+        forms.setFullName(req.fullName());
+        forms.setEmail(req.email());
+        forms.setModuleId(req.moduleId());
+        forms.setTeacherId(req.teacherId());
+        forms.setFirstQuestion(req.firstQuestion());
+        forms.setSecondQuestion(req.secondQuestion());
+        return forms;
+    }
+
 }
