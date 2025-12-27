@@ -20,8 +20,6 @@ import java.util.List;
 public class CreateStudentService {
 
     private final CreateStudentRepository repo;
-    private final UserLoginRepository userRepo;
-    private final PasswordEncoder passwordEncoder;
     private final StudentLoginService loginService;
 
     public CreateStudentService(CreateStudentRepository repo,
@@ -29,8 +27,6 @@ public class CreateStudentService {
                                 PasswordEncoder passwordEncoder,
                                 StudentLoginService loginService) {
         this.repo = repo;
-        this.userRepo = userRepo;
-        this.passwordEncoder = passwordEncoder;
         this.loginService = loginService;
     }
 

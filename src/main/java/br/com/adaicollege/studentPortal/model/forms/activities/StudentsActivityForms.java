@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.model.forms;
+package br.com.adaicollege.studentPortal.model.forms.activities;
 
 import br.com.adaicollege.studentPortal.data.formsDTO.activities.StudentsActivityFormRequest;
 import org.springframework.data.annotation.Id;
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class StudentsActivityForms {
     // represents the data after each class
 
-     @Id
+    @Id
     private String id;
     private String registrationNumber;
     private String fullName;

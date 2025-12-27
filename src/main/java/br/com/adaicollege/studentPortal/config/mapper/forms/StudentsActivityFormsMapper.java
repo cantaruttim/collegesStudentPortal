@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.config.mapper.forms;
 
 import br.com.adaicollege.studentPortal.data.formsDTO.StudentsActivityFormsDTO;
-import br.com.adaicollege.studentPortal.model.forms.StudentsActivityForms;
+import br.com.adaicollege.studentPortal.model.forms.activities.StudentsActivityForms;
 
 public class StudentsActivityFormsMapper {
 

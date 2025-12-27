@@ -1,9 +1,8 @@
 package br.com.adaicollege.studentPortal.service.forms;
 
-import br.com.adaicollege.studentPortal.config.mapper.forms.StudentsActivityFormsMapper;
-import br.com.adaicollege.studentPortal.data.formsDTO.StudentsActivityFormsDTO;
-import br.com.adaicollege.studentPortal.model.academic.Modules;
-import br.com.adaicollege.studentPortal.model.forms.StudentsActivityForms;
+import br.com.adaicollege.studentPortal.data.formsDTO.activities.ActivityFormsResponse;
+import br.com.adaicollege.studentPortal.data.formsDTO.activities.StudentsActivityFormRequest;
+import br.com.adaicollege.studentPortal.model.forms.activities.StudentsActivityForms;
 import br.com.adaicollege.studentPortal.repository.forms.StudentActivityFormsRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,89 +13,41 @@ import java.util.List;
 @Service
 public class StudentActivityFormsService {
 
-    private final StudentActivityFormsRepository activityFormsRepo;
+    private final StudentActivityFormsRepository repo;
 
-    public StudentActivityFormsService(StudentActivityFormsRepository activityFormsRepo) {
-        this.activityFormsRepo = activityFormsRepo;
+    public StudentActivityFormsService(StudentActivityFormsRepository repo) {
+        this.repo = repo;
     }
 
+    public ActivityFormsResponse create(StudentsActivityFormRequest request) {
+        // implements a warning if the response were sand at that specific day
 
-    // -------------------------------------------------------------
-    // CREATE
-    // -------------------------------------------------------------
-    public StudentsActivityFormsDTO save(StudentsActivityFormsDTO dto) {
+        StudentsActivityForms forms = StudentsActivityForms.from(request);
 
-        StudentsActivityForms activity = StudentsActivityFormsMapper.toEntity(dto);
-        activity.setId(null); // Mongo gera o ID
+        StudentsActivityForms saved = repo.save(forms);
 
-        StudentsActivityForms saved = activityFormsRepo.save(activity);
-        return StudentsActivityFormsMapper.toDTO(saved);
+        return new ActivityFormsResponse(saved);
     }
 
-    // -------------------------------------------------------------
-    // LIST ALL
-    // -------------------------------------------------------------
-    public List<StudentsActivityFormsDTO> listAll() {
-        return activityFormsRepo.findAll()
+    public List<ActivityFormsResponse> listAll() {
+        return repo.findAll()
                 .stream()
-                .map(StudentsActivityFormsMapper::toDTO)
+                .map(ActivityFormsResponse::new)
                 .toList();
     }
 
-    // -------------------------------------------------------------
-    // FIND BY ID
-    // -------------------------------------------------------------
-    public StudentsActivityFormsDTO findById(String id) {
 
-        StudentsActivityForms activity = activityFormsRepo.findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(
+    public ActivityFormsResponse findById(String id) {
+        return new ActivityFormsResponse(
+                repo.findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "Employee not found: " + id
-                        )
-                );
-
-        return StudentsActivityFormsMapper.toDTO(activity);
+                                "Student not found"
+                        ))
+        );
     }
 
-    // -------------------------------------------------------------
-    // UPDATE
-    // -------------------------------------------------------------
-    public StudentsActivityFormsDTO update(String id, StudentsActivityFormsDTO dto) {
 
-        StudentsActivityForms activity = activityFormsRepo.findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Employee not found: " + id
-                        )
-                );
 
-        activity.setId(dto.getId());
-        activity.setRegistrationNumber(dto.getRegistrationNumber());
-        activity.setFullName(dto.getFullName());
-        activity.setEmail(dto.getEmail());
-        activity.setFirstQuestion(dto.getFirstQuestion());
-        activity.setSecondQuestion(dto.getSecondQuestion());
-        activity.setModuleId(dto.getModuleId());
-
-        StudentsActivityForms updated = activityFormsRepo.save(activity);
-        return StudentsActivityFormsMapper.toDTO(updated);
-    }
-    
-    // -------------------------------------------------------------
-    // DELETE
-    // -------------------------------------------------------------
-    public void delete(String id) {
-
-        if (!activityFormsRepo.existsById(id)) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "Employee not found: " + id
-            );
-        }
-
-        activityFormsRepo.deleteById(id);
-    }
 
 }
