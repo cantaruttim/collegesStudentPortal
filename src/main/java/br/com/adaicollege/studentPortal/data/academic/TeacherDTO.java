@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.data.academicDTO;
+package br.com.adaicollege.studentPortal.data.academic;
 
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 

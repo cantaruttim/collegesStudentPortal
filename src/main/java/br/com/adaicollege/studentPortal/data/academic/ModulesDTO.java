@@ -1,6 +1,5 @@
-package br.com.adaicollege.studentPortal.data.academicDTO;
+package br.com.adaicollege.studentPortal.data.academic;
 
-import br.com.adaicollege.studentPortal.model.academic.Teacher;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 
 import java.time.LocalDate;

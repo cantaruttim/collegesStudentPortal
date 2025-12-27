@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.config.mapper.academic;
 
-import br.com.adaicollege.studentPortal.data.academicDTO.ModulesDTO;
+import br.com.adaicollege.studentPortal.data.academic.ModulesDTO;
 import br.com.adaicollege.studentPortal.model.academic.Modules;
 
 public class ModulesMapper {

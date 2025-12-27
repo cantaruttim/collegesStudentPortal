@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.data.formsDTO;
+package br.com.adaicollege.studentPortal.data.forms;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

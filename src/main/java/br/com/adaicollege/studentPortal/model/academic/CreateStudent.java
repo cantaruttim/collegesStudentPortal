@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.model.academic;
 
-import br.com.adaicollege.studentPortal.data.academicDTO.student.CreateStudentRequest;
+import br.com.adaicollege.studentPortal.data.academic.student.CreateStudentRequest;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import org.springframework.data.annotation.Id;

@@ -1,9 +1,9 @@
 package br.com.adaicollege.studentPortal.service.academic.student;
 
 import br.com.adaicollege.studentPortal.config.exceptions.StudentAlreadyExistsException;
-import br.com.adaicollege.studentPortal.data.academicDTO.student.CreateStudentRequest;
-import br.com.adaicollege.studentPortal.data.academicDTO.student.StudentResponse;
-import br.com.adaicollege.studentPortal.data.academicDTO.student.UpdateStudentRequest;
+import br.com.adaicollege.studentPortal.data.academic.student.CreateStudentRequest;
+import br.com.adaicollege.studentPortal.data.academic.student.StudentResponse;
+import br.com.adaicollege.studentPortal.data.academic.student.UpdateStudentRequest;
 import br.com.adaicollege.studentPortal.model.academic.CreateStudent;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import br.com.adaicollege.studentPortal.repository.academic.CreateStudentRepository;

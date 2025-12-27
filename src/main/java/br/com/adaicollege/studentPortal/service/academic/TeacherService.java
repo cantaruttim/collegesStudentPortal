@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.service.academic;
 
 import br.com.adaicollege.studentPortal.config.mapper.academic.TeacherMapper;
-import br.com.adaicollege.studentPortal.data.academicDTO.TeacherDTO;
+import br.com.adaicollege.studentPortal.data.academic.TeacherDTO;
 import br.com.adaicollege.studentPortal.model.academic.Teacher;
 import br.com.adaicollege.studentPortal.repository.academic.TeacherRepository;
 import org.springframework.http.HttpStatus;

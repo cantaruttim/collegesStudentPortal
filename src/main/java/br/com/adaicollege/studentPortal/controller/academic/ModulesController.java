@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.controller.academic;
 
-import br.com.adaicollege.studentPortal.data.academicDTO.ModulesDTO;
+import br.com.adaicollege.studentPortal.data.academic.ModulesDTO;
 import br.com.adaicollege.studentPortal.service.academic.ModulesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

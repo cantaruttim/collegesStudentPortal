@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.controller.forms;
 
-import br.com.adaicollege.studentPortal.data.formsDTO.activities.ActivityFormsResponse;
-import br.com.adaicollege.studentPortal.data.formsDTO.activities.StudentsActivityFormRequest;
+import br.com.adaicollege.studentPortal.data.forms.activities.ActivityFormsResponse;
+import br.com.adaicollege.studentPortal.data.forms.activities.StudentsActivityFormRequest;
 import br.com.adaicollege.studentPortal.service.forms.StudentActivityFormsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

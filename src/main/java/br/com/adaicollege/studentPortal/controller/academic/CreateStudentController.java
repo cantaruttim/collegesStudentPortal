@@ -1,8 +1,8 @@
 package br.com.adaicollege.studentPortal.controller.academic;
 
-import br.com.adaicollege.studentPortal.data.academicDTO.student.CreateStudentRequest;
-import br.com.adaicollege.studentPortal.data.academicDTO.student.UpdateStudentRequest;
-import br.com.adaicollege.studentPortal.data.academicDTO.student.StudentResponse;
+import br.com.adaicollege.studentPortal.data.academic.student.CreateStudentRequest;
+import br.com.adaicollege.studentPortal.data.academic.student.UpdateStudentRequest;
+import br.com.adaicollege.studentPortal.data.academic.student.StudentResponse;
 import br.com.adaicollege.studentPortal.service.academic.student.CreateStudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

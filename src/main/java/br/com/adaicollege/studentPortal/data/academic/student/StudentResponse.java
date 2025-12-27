@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.data.academicDTO.student;
+package br.com.adaicollege.studentPortal.data.academic.student;
 
 import br.com.adaicollege.studentPortal.model.academic.CreateStudent;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
