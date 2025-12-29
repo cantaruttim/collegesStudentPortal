@@ -1,5 +1,6 @@
 package br.com.adaicollege.studentPortal.model.academic.secretary;
 
+import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesRequest;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -45,11 +46,11 @@ public class Modules {
         this.moduleDescription = moduleDescription;
     }
 
-    public String getteacherId() {
+    public String getTeacherId() {
         return teacherId;
     }
 
-    public void setteacherId(String teacherId) {
+    public void setTeacherId(String teacherId) {
         this.teacherId = teacherId;
     }
 
@@ -84,4 +85,18 @@ public class Modules {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
+    public static Modules from(ModulesRequest req) {
+        Modules modules = new Modules();
+        modules.setModuleName(req.moduleName());
+        modules.setModuleDescription(req.moduleDescription());
+        modules.setCourse(req.course());
+        modules.setTeacherId(req.teacherId());
+        modules.setQuantityClasses(req.quantityClasses());
+        modules.setStartDate(req.startDate());
+        modules.setEndDate(req.endDate());
+        return modules;
+    }
+
+
 }
