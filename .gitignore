@@ -2,7 +2,6 @@
 ### CONFIG FILES ###
 *.env
 .env
-docker-compose.yml
 
 target/
 .mvn/wrapper/maven-wrapper.jar
