@@ -1,9 +1,16 @@
 package br.com.adaicollege.studentPortal.service.academic.secretary;
 
+import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesRequest;
 import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesResponse;
+import br.com.adaicollege.studentPortal.data.academic.student.StudentResponse;
 import br.com.adaicollege.studentPortal.data.activities.ActivityFormsResponse;
+import br.com.adaicollege.studentPortal.data.activities.StudentsActivityFormRequest;
+import br.com.adaicollege.studentPortal.model.academic.secretary.Modules;
+import br.com.adaicollege.studentPortal.model.forms.activities.StudentsActivityForms;
 import br.com.adaicollege.studentPortal.repository.academic.ModulesRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -14,6 +21,27 @@ public class ModulesService {
 
     public ModulesService(ModulesRepository repo) {
         this.repo = repo;
+    }
+
+
+
+
+
+    public ModulesResponse create(ModulesRequest request) {
+        Modules forms = Modules.from(request);
+        Modules saved = repo.save(forms);
+
+        return new ModulesResponse(saved);
+    }
+
+    public ModulesResponse findById(String id) {
+        return new ModulesResponse(
+                repo.findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Student not found"
+                        ))
+        );
     }
 
     public List<ModulesResponse> listAll() {

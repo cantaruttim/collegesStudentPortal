@@ -25,7 +25,7 @@ public class TeacherService {
     public TeacherDTO save(TeacherDTO dto) {
 
         Teacher teacher = TeacherMapper.toEntity(dto);
-        teacher.setId(null); // Mongo gera o ID
+        teacher.setId(null);
 
         Teacher saved = teacherRepo.save(teacher);
         return TeacherMapper.toDTO(saved);

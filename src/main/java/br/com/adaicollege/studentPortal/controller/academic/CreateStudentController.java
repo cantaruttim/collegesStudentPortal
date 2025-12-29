@@ -33,7 +33,7 @@ public class CreateStudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentResponse> getById(
+    public ResponseEntity<StudentResponse> findById(
             @PathVariable String id
     ) {
         return ResponseEntity.ok(service.findById(id));
