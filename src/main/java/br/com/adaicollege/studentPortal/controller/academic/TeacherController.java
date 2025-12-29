@@ -1,7 +1,10 @@
 package br.com.adaicollege.studentPortal.controller.academic;
 
+import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesResponse;
+import br.com.adaicollege.studentPortal.data.academic.secretary.modules.UpdateModulesRequest;
 import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherRequest;
 import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherResponse;
+import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.UpdateTeacherRequest;
 import br.com.adaicollege.studentPortal.service.academic.secretary.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +39,15 @@ public class TeacherController {
     ) {
         return ResponseEntity.ok(service.findById(id));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TeacherResponse> update(
+            @PathVariable String id,
+            @RequestBody UpdateTeacherRequest request
+    ) {
+        TeacherResponse updated = service.update(id, request);
+        return ResponseEntity.ok(updated);
+    }
+
 
 }
