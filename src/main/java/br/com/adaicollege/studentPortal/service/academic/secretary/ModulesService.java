@@ -1,7 +1,9 @@
 package br.com.adaicollege.studentPortal.service.academic.secretary;
 
+import br.com.adaicollege.studentPortal.config.exceptions.ModuleNotFoundException;
 import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesRequest;
 import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesResponse;
+import br.com.adaicollege.studentPortal.data.academic.secretary.modules.UpdateModulesRequest;
 import br.com.adaicollege.studentPortal.model.academic.secretary.Modules;
 import br.com.adaicollege.studentPortal.repository.academic.ModulesRepository;
 import org.springframework.http.HttpStatus;
@@ -20,8 +22,21 @@ public class ModulesService {
     }
 
 
+    public ModulesResponse update(String id, UpdateModulesRequest request) {
 
+        Modules module = repo.findById(id).orElseThrow(() -> new ModuleNotFoundException(id));
 
+        module.setModuleName(request.moduleName());
+        module.setModuleDescription(request.moduleDescription());
+        module.setTeacherId(request.teacherId());
+        module.setCourse(request.course());
+        module.setQuantityClasses(request.quantityClasses());
+        module.setStartDate(request.startDate());
+
+        Modules saved = repo.save(module);
+
+        return new ModulesResponse(saved);
+    }
 
     public ModulesResponse create(ModulesRequest request) {
         Modules forms = Modules.from(request);
@@ -32,11 +47,7 @@ public class ModulesService {
 
     public ModulesResponse findById(String id) {
         return new ModulesResponse(
-                repo.findById(id)
-                        .orElseThrow(() -> new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Student not found"
-                        ))
+                repo.findById(id).orElseThrow(() -> new ModuleNotFoundException(id))
         );
     }
 
