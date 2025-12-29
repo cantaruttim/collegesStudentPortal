@@ -1,5 +1,7 @@
 package br.com.adaicollege.studentPortal.model.academic.secretary;
 
+import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesRequest;
+import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherRequest;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -55,4 +57,15 @@ public class Teacher {
     public void setCourseLectures(CollegeCourse courseLectures) {
         this.courseLectures = courseLectures;
     }
+
+    public static Teacher from(TeacherRequest req) {
+        Teacher teacher = new Teacher();
+        teacher.setFirstName(req.firstName());
+        teacher.setFamilyName(req.familyName());
+        teacher.setModuleNameId(req.moduleNameId());
+        teacher.setCourseLectures(req.courseLectures());
+        return teacher;
+    }
+
+
 }

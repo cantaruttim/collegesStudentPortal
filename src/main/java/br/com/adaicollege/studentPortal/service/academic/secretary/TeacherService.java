@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.service.academic.secretary;
 
-import br.com.adaicollege.studentPortal.config.mapper.academic.TeacherMapper;
-import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherDTO;
+import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherRequest;
+import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherResponse;
 import br.com.adaicollege.studentPortal.model.academic.secretary.Teacher;
 import br.com.adaicollege.studentPortal.repository.academic.TeacherRepository;
 import org.springframework.http.HttpStatus;
@@ -13,85 +13,33 @@ import java.util.List;
 @Service
 public class TeacherService {
 
-    private final TeacherRepository teacherRepo;
+    private final TeacherRepository repo;
 
-    public TeacherService(TeacherRepository teacherRepo) {
-        this.teacherRepo = teacherRepo;
+    public TeacherService(TeacherRepository repo) { this.repo = repo; }
+
+    public TeacherResponse create(TeacherRequest request) {
+        Teacher teacher = Teacher.from(request);
+        Teacher saved = repo.save(teacher);
+
+        return new TeacherResponse(saved);
     }
 
-    // -------------------------------------------------------------
-    // CREATE
-    // -------------------------------------------------------------
-    public TeacherDTO save(TeacherDTO dto) {
-
-        Teacher teacher = TeacherMapper.toEntity(dto);
-        teacher.setId(null);
-
-        Teacher saved = teacherRepo.save(teacher);
-        return TeacherMapper.toDTO(saved);
+    public TeacherResponse findById(String id) {
+        return new TeacherResponse(
+                repo.findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Student not found"
+                        )
+                )
+        );
     }
 
-    // -------------------------------------------------------------
-    // LIST ALL
-    // -------------------------------------------------------------
-    public List<TeacherDTO> listAll() {
-        return teacherRepo.findAll()
+    public List<TeacherResponse> listAll() {
+        return repo.findAll()
                 .stream()
-                .map(TeacherMapper::toDTO)
+                .map(TeacherResponse::new)
                 .toList();
-    }
-
-    // -------------------------------------------------------------
-    // FIND BY ID
-    // -------------------------------------------------------------
-    public TeacherDTO findById(String id) {
-
-        Teacher mod = teacherRepo.findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Employee not found: " + id
-                        )
-                );
-
-        return TeacherMapper.toDTO(mod);
-    }
-
-    // -------------------------------------------------------------
-    // UPDATE
-    // -------------------------------------------------------------
-    public TeacherDTO update(String id, TeacherDTO dto) {
-
-        Teacher teacher = teacherRepo.findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "Employee not found: " + id
-                        )
-                );
-        
-        teacher.setFirstName(dto.getFirstName());
-        teacher.setFamilyName(dto.getFamilyName());
-        teacher.setModuleNameId(dto.getModuleName());
-        teacher.setCourseLectures(dto.getCourseLectures());
-
-        Teacher updated = teacherRepo.save(teacher);
-        return TeacherMapper.toDTO(updated);
-    }
-
-    // -------------------------------------------------------------
-    // DELETE
-    // -------------------------------------------------------------
-    public void delete(String id) {
-
-        if (!teacherRepo.existsById(id)) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "Employee not found: " + id
-            );
-        }
-
-        teacherRepo.deleteById(id);
     }
 
 

@@ -2,11 +2,7 @@ package br.com.adaicollege.studentPortal.service.academic.secretary;
 
 import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesRequest;
 import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesResponse;
-import br.com.adaicollege.studentPortal.data.academic.student.StudentResponse;
-import br.com.adaicollege.studentPortal.data.activities.ActivityFormsResponse;
-import br.com.adaicollege.studentPortal.data.activities.StudentsActivityFormRequest;
 import br.com.adaicollege.studentPortal.model.academic.secretary.Modules;
-import br.com.adaicollege.studentPortal.model.forms.activities.StudentsActivityForms;
 import br.com.adaicollege.studentPortal.repository.academic.ModulesRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
