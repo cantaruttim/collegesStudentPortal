@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.config.mapper.academic;
 
-import br.com.adaicollege.studentPortal.data.academic.secretary.TeacherDTO;
-import br.com.adaicollege.studentPortal.model.academic.Teacher;
+import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherDTO;
+import br.com.adaicollege.studentPortal.model.academic.secretary.Teacher;
 
 public class TeacherMapper {
 

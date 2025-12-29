@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.config.Import.strategy;
 
 import br.com.adaicollege.studentPortal.config.Import.enums.ImportEntityType;
-import br.com.adaicollege.studentPortal.model.academic.CreateStudent;
+import br.com.adaicollege.studentPortal.model.academic.student.CreateStudent;
 import br.com.adaicollege.studentPortal.repository.academic.CreateStudentRepository;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;

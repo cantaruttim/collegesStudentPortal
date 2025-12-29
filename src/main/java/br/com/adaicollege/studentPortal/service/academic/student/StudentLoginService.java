@@ -2,7 +2,7 @@ package br.com.adaicollege.studentPortal.service.academic.student;
 
 import br.com.adaicollege.studentPortal.config.utils.PasswordUtils;
 import br.com.adaicollege.studentPortal.config.utils.StudentNumber;
-import br.com.adaicollege.studentPortal.model.academic.CreateStudent;
+import br.com.adaicollege.studentPortal.model.academic.student.CreateStudent;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;

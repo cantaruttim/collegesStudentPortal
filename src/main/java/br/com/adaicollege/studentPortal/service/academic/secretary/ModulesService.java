@@ -1,8 +1,8 @@
 package br.com.adaicollege.studentPortal.service.academic.secretary;
 
 import br.com.adaicollege.studentPortal.config.mapper.academic.ModulesMapper;
-import br.com.adaicollege.studentPortal.data.academic.secretary.ModulesDTO;
-import br.com.adaicollege.studentPortal.model.academic.Modules;
+import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesDTO;
+import br.com.adaicollege.studentPortal.model.academic.secretary.Modules;
 import br.com.adaicollege.studentPortal.repository.academic.ModulesRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

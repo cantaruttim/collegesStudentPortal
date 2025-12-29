@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.repository.academic;
 
-import br.com.adaicollege.studentPortal.model.academic.CreateStudent;
+import br.com.adaicollege.studentPortal.model.academic.student.CreateStudent;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

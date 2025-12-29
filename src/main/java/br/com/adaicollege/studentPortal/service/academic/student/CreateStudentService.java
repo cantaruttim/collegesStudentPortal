@@ -4,7 +4,7 @@ import br.com.adaicollege.studentPortal.config.exceptions.StudentAlreadyExistsEx
 import br.com.adaicollege.studentPortal.data.academic.student.CreateStudentRequest;
 import br.com.adaicollege.studentPortal.data.academic.student.StudentResponse;
 import br.com.adaicollege.studentPortal.data.academic.student.UpdateStudentRequest;
-import br.com.adaicollege.studentPortal.model.academic.CreateStudent;
+import br.com.adaicollege.studentPortal.model.academic.student.CreateStudent;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import br.com.adaicollege.studentPortal.repository.academic.CreateStudentRepository;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;

@@ -1,19 +1,25 @@
-package br.com.adaicollege.studentPortal.data.academic.secretary;
+package br.com.adaicollege.studentPortal.model.academic.secretary;
 
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-public class ModulesDTO {
+@Document
+public class Modules {
 
+    @Id
     private String id;
     private String moduleName;
     private String moduleDescription;
-    private String teacherName;
+    private String teacherId;
     private CollegeCourse course;
     private Integer quantityClasses;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    public Modules() {}
 
     public String getId() {
         return id;
@@ -39,12 +45,12 @@ public class ModulesDTO {
         this.moduleDescription = moduleDescription;
     }
 
-    public String getTeacherName() {
-        return teacherName;
+    public String getteacherId() {
+        return teacherId;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
+    public void setteacherId(String teacherId) {
+        this.teacherId = teacherId;
     }
 
     public CollegeCourse getCourse() {

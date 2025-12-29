@@ -1,16 +1,20 @@
-package br.com.adaicollege.studentPortal.data.academic.secretary;
+package br.com.adaicollege.studentPortal.model.academic.secretary;
 
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class TeacherDTO {
+@Document
+public class Teacher {
 
+    @Id
     private String id;
     private String firstName;
     private String familyName;
-    private String moduleName;
+    private String moduleNameId;
     private CollegeCourse courseLectures;
 
-    public TeacherDTO() {}
+    public Teacher() {}
 
     public String getId() {
         return id;
@@ -36,12 +40,12 @@ public class TeacherDTO {
         this.familyName = familyName;
     }
 
-    public String getModuleName() {
-        return moduleName;
+    public String getModuleNameId() {
+        return moduleNameId;
     }
 
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
+    public void setModuleNameId(String moduleNameId) {
+        this.moduleNameId = moduleNameId;
     }
 
     public CollegeCourse getCourseLectures() {

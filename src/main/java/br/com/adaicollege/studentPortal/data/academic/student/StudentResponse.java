@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.data.academic.student;
 
-import br.com.adaicollege.studentPortal.model.academic.CreateStudent;
+import br.com.adaicollege.studentPortal.model.academic.student.CreateStudent;
 import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 

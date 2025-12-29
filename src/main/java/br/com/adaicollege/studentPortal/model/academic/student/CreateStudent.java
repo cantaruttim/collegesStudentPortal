@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.model.academic;
+package br.com.adaicollege.studentPortal.model.academic.student;
 
 import br.com.adaicollege.studentPortal.data.academic.student.CreateStudentRequest;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
