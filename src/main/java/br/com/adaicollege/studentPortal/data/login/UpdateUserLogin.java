@@ -1,5 +1,4 @@
 package br.com.adaicollege.studentPortal.data.login;
 
 
-public record UpdateUserLogin() {
-}
+public record UpdateUserLogin() { }
