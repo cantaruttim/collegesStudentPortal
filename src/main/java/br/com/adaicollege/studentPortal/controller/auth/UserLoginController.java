@@ -19,7 +19,7 @@ public class UserLoginController {
         this.service = service;
     }
 
-    @PostMapping("/user-login")
+    @PostMapping("/login")
     public ResponseEntity<MyToken> login(@RequestBody UserLogin user) {
         return ResponseEntity.ok(service.userLogin(user));
     }

@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.config.mapper.login;
+package br.com.adaicollege.studentPortal.config.mapper;
 
 import br.com.adaicollege.studentPortal.data.login.UserLoginDTO;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
