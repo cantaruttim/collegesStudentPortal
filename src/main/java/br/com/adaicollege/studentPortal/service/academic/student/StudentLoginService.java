@@ -9,6 +9,8 @@ import br.com.adaicollege.studentPortal.service.utils.EmailService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class StudentLoginService {
 
@@ -43,6 +45,8 @@ public class StudentLoginService {
         user.setRegistrationNumber(registrationNumber);
         user.setStudentPassword(encryptedPassword);
         user.setStudentId(student.getId());
+        user.setFirstAccess(true);
+        user.setPasswordExpiresAt(LocalDateTime.now().plusHours(24));
 
         userRepo.save(user);
 
