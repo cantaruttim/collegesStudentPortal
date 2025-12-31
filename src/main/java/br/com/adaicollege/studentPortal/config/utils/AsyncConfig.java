@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.config;
+package br.com.adaicollege.studentPortal.config.utils;
 
 
 import org.springframework.context.annotation.Configuration;

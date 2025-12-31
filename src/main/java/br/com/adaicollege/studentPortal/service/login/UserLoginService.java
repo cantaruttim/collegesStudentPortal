@@ -4,6 +4,7 @@ import br.com.adaicollege.studentPortal.config.exceptions.FirstAccessPasswordCha
 import br.com.adaicollege.studentPortal.config.exceptions.PasswordExpiredException;
 import br.com.adaicollege.studentPortal.config.security.auth.MyToken;
 import br.com.adaicollege.studentPortal.config.utils.TokenUtil;
+import br.com.adaicollege.studentPortal.data.auth.ChangePasswordRequest;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -54,10 +55,30 @@ public class UserLoginService {
         }
 
         return TokenUtil.encode(storedUser);
+    }
 
+    public void changePassword(ChangePasswordRequest request) {
 
+        UserLogin user = repo
+                .findByRegistrationNumber(request.registrationNumber())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+        if (!encoder.matches(
+                request.oldPassword(),
+                user.getStudentPassword()
+        )) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        user.setStudentPassword(
+                encoder.encode(request.newPassword())
+        );
+        user.setFirstAccess(false);
+        user.setPasswordExpiresAt(null);
+
+        repo.save(user);
     }
 
 }
