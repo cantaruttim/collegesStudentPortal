@@ -1,3 +1,5 @@
+
+```mermaid
 graph TD
 Controller[Controllers]
 StudentService[CreateStudentService]
@@ -18,3 +20,4 @@ Repositories[Mongo Repositories]
 
     LoginService --> Repositories
     LoginService --> TokenUtil
+```

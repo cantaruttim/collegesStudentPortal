@@ -1,3 +1,4 @@
+```mermaid
 graph TB
 User[User / Student]
 
@@ -20,3 +21,4 @@ User[User / Student]
     API --> Security
     API --> Mongo
     API --> Mail
+```

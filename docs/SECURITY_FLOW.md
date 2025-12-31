@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
 participant Client
 participant AuthController
@@ -12,3 +13,4 @@ participant TokenUtil
     Client->>API: Request with Authorization Bearer
     API->>TokenUtil: validate JWT
     TokenUtil-->>API: Authentication OK
+```

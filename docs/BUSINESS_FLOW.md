@@ -1,3 +1,5 @@
+```mermaid
+
 sequenceDiagram
 participant Client
 participant Controller
@@ -14,3 +16,4 @@ participant EmailService
     StudentLoginService->>UserLoginRepo: save(userLogin)
     StudentLoginService->>EmailService: sendWelcomeEmail()
     Controller-->>Client: 201 Created (StudentResponse)
+```
