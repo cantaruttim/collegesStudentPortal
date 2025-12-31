@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.controller;
+package br.com.adaicollege.studentPortal.controller.tests;
 
 import br.com.adaicollege.studentPortal.service.utils.EmailService;
 import org.springframework.http.ResponseEntity;
