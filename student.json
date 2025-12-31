@@ -1,9 +1,9 @@
 {
-  "firstName": "Matheus",
-  "familyName": "Cantarutti",
+  "firstName": "Carlos",
+  "familyName": "Silva",
   "email": "cantaruttimatheus94@gmail.com",
-  "socialSecurityNumber": "12345678901",
-  "birthDate": "1994-09-10",
-  "courseEnrolled": "COLLEGE_INTENSIVE",
-  "moduleNameId": "module-1"
+  "socialSecurityNumber": "0123456789",
+  "birthDate": "1998-05-15",
+  "courseEnrolled": "COLLEGE_MASTER",
+  "moduleNameId": "module-2"
 }
