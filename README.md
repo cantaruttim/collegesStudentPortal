@@ -11,7 +11,8 @@ because we can easily manipulate students' and academic's information.
 ## Frameworks
 - JWT
 -- Password Cryptography (encode, decode)
-- Spring Security 
+- Spring Security
+- Spring Email
 - Spring Boot 
 - Java 21
 
@@ -19,3 +20,7 @@ because we can easily manipulate students' and academic's information.
 
 
 ## Benefits 
+- Build a system where the registration number of a student is created automatically, as well as, a default password is created automatically. Those two benefits are new to portal student.
+- Security is our main goal where, so the student only will be authorized to access the his portal after change the default password on his first access.
+
+- Student's grades are calculated automatically as bussiness rules.
