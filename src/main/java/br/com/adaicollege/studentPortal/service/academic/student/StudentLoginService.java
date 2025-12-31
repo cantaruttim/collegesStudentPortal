@@ -5,6 +5,7 @@ import br.com.adaicollege.studentPortal.config.utils.StudentNumber;
 import br.com.adaicollege.studentPortal.model.academic.student.CreateStudent;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
+import br.com.adaicollege.studentPortal.service.utils.EmailService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,14 @@ public class StudentLoginService {
 
     private final UserLoginRepository userRepo;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     public StudentLoginService(UserLoginRepository userRepo,
-                               PasswordEncoder passwordEncoder) {
+                               PasswordEncoder passwordEncoder,
+                               EmailService emailService) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     public void createForStudent(CreateStudent student) {
@@ -41,6 +45,13 @@ public class StudentLoginService {
         user.setStudentId(student.getId());
 
         userRepo.save(user);
+
+        // sending email to students
+        emailService.sendStudentAccessEmail(
+                student.getEmail(),
+                registrationNumber,
+                rawPassword
+        );
     }
 
 }

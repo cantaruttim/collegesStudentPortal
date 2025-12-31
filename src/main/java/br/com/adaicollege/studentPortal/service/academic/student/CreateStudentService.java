@@ -48,7 +48,11 @@ public class CreateStudentService {
         student.setEnrolledAt(LocalDateTime.now());
 
         CreateStudent saved = repo.save(student);
+
+
+        // IMPLEMENTING EMAIL SENDER
         loginService.createForStudent(saved);
+
 
         return new StudentResponse(saved);
     }

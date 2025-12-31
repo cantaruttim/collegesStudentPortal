@@ -3,6 +3,8 @@ package br.com.adaicollege.studentPortal.model.login;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Document(collection = "users_login")
 public class UserLogin {
 
@@ -13,6 +15,9 @@ public class UserLogin {
     private String studentPassword;
 
     private String studentId;
+
+    private boolean firstAccess;
+    private LocalDateTime passwordExpiresAt;
 
     public UserLogin() {}
 
@@ -46,5 +51,21 @@ public class UserLogin {
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
+    }
+
+    public boolean isFirstAccess() {
+        return firstAccess;
+    }
+
+    public void setFirstAccess(boolean firstAccess) {
+        this.firstAccess = firstAccess;
+    }
+
+    public LocalDateTime getPasswordExpiresAt() {
+        return passwordExpiresAt;
+    }
+
+    public void setPasswordExpiresAt(LocalDateTime passwordExpiresAt) {
+        this.passwordExpiresAt = passwordExpiresAt;
     }
 }
