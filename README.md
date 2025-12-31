@@ -8,13 +8,14 @@ during the course.
 All the system will be implemented using a No Relational Database MongoDB
 because we can easily manipulate students' and academic's information.
 
-## Frameworks
-- JWT
--- Password Cryptography (encode, decode)
-- Spring Security
-- Spring Email
-- Spring Boot 
+## 🛠️ Technologies & Tools
+
 - Java 21
+- Spring Boot
+- Spring Security
+  - JWT
+  - Password Cryptography (encode, decode)
+- Spring Email
 
 ## Modeling 
 
