@@ -17,6 +17,7 @@ public class StudentLoginService {
     private final UserLoginRepository userRepo;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final Integer EXPIRATION_PASSWORD_TIME = 24;
 
     public StudentLoginService(UserLoginRepository userRepo,
                                PasswordEncoder passwordEncoder,
@@ -26,6 +27,7 @@ public class StudentLoginService {
         this.emailService = emailService;
     }
 
+
     public void createForStudent(CreateStudent student) {
 
         String registrationNumber =
@@ -34,23 +36,20 @@ public class StudentLoginService {
                 );
 
         String rawPassword =
-                PasswordUtils.defaultPassword(
-                        student.getSocialSecurityNumber(),
+                PasswordUtils.createDefaultPassword(
+                        registrationNumber,
                         student.getCourseEnrolled().name()
                 );
 
-        String encryptedPassword = passwordEncoder.encode(rawPassword);
-
         UserLogin user = new UserLogin();
         user.setRegistrationNumber(registrationNumber);
-        user.setStudentPassword(encryptedPassword);
+        user.setStudentPassword(passwordEncoder.encode(rawPassword));
         user.setStudentId(student.getId());
         user.setFirstAccess(true);
-        user.setPasswordExpiresAt(LocalDateTime.now().plusHours(24));
+        user.setPasswordExpiresAt(LocalDateTime.now().plusHours(EXPIRATION_PASSWORD_TIME));
 
         userRepo.save(user);
 
-        // sending email to students
         emailService.sendStudentAccessEmail(
                 student.getEmail(),
                 registrationNumber,
@@ -58,4 +57,39 @@ public class StudentLoginService {
         );
     }
 
+
+    public void resendFirstAccessPassword(CreateStudent student) {
+
+        UserLogin user = userRepo.findByRegistrationNumber(
+                        StudentNumber.defaultStudentNumber(
+                                student.getSocialSecurityNumber()
+                        )
+                )
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.isFirstAccess()) {
+            throw new RuntimeException("User already completed first access");
+        }
+
+        if (user.getPasswordExpiresAt().isAfter(LocalDateTime.now())) {
+            throw new RuntimeException("Temporary password is still valid");
+        }
+
+        String newTempPassword =
+                PasswordUtils.createTemporaryPassword(
+                        user.getRegistrationNumber(),
+                        student.getCourseEnrolled().name()
+                );
+
+        user.setStudentPassword(passwordEncoder.encode(newTempPassword));
+        user.setPasswordExpiresAt(LocalDateTime.now().plusHours(EXPIRATION_PASSWORD_TIME));
+
+        userRepo.save(user);
+
+        emailService.sendStudentAccessEmail(
+                student.getEmail(),
+                user.getRegistrationNumber(),
+                newTempPassword
+        );
+    }
 }

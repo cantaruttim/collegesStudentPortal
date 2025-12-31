@@ -16,8 +16,8 @@ public class UserLogin {
 
     private String studentId;
 
-    private LocalDateTime passwordChangedAt;
     private boolean firstAccess;
+    private LocalDateTime passwordChangedAt;
     private LocalDateTime passwordExpiresAt;
 
     public UserLogin() {}

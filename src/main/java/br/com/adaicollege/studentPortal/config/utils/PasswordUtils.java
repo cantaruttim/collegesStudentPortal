@@ -5,6 +5,15 @@ import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import java.time.LocalDate;
 
 public class PasswordUtils {
+
+    public static String createDefaultPassword(String registrationNumber, String course) {
+        return defaultPassword(registrationNumber, course);
+    }
+
+    public static String createTemporaryPassword(String registrationNumber, String course) {
+        return defaultPassword(registrationNumber, course);
+    }
+
     public static String defaultPassword(String registrationNumber, String course) {
     // used when a student is created
 
