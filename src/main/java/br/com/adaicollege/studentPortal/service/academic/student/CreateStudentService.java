@@ -49,8 +49,6 @@ public class CreateStudentService {
 
         CreateStudent saved = repo.save(student);
 
-
-        // IMPLEMENTING EMAIL SENDER
         loginService.createForStudent(saved);
 
 
