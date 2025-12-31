@@ -49,7 +49,7 @@ public class ModuleImportStrategy implements ImportStrategy {
                 Modules module = new Modules();
                 module.setModuleName(record.get("module_name"));
                 module.setModuleDescription(record.get("module_description"));
-                module.setTeacherName(record.get("teacher_name"));
+                module.setTeacherId(record.get("teacher_name"));
                 module.setCourse(CollegeCourse.valueOf(record.get("course")));
                 module.setQuantityClasses(Integer.valueOf(record.get("quantity_classes")));
 
@@ -79,7 +79,7 @@ public class ModuleImportStrategy implements ImportStrategy {
                 Modules module = new Modules();
                 module.setModuleName(row.getCell(0).getStringCellValue());
                 module.setModuleDescription(row.getCell(1).getStringCellValue());
-                module.setTeacherName(row.getCell(2).getStringCellValue());
+                module.setTeacherId(row.getCell(2).getStringCellValue());
                 module.setCourse(CollegeCourse.valueOf(row.getCell(3).getStringCellValue()));
                 module.setQuantityClasses(Integer.valueOf(row.getCell(4).getStringCellValue()));
 
