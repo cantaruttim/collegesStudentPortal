@@ -16,6 +16,7 @@ public class UserLogin {
 
     private String studentId;
 
+    private LocalDateTime passwordChangedAt;
     private boolean firstAccess;
     private LocalDateTime passwordExpiresAt;
 
@@ -67,5 +68,13 @@ public class UserLogin {
 
     public void setPasswordExpiresAt(LocalDateTime passwordExpiresAt) {
         this.passwordExpiresAt = passwordExpiresAt;
+    }
+
+    public LocalDateTime getPasswordChangedAt() {
+        return passwordChangedAt;
+    }
+
+    public void setPasswordChangedAt(LocalDateTime passwordChangedAt) {
+        this.passwordChangedAt = passwordChangedAt;
     }
 }
