@@ -5,7 +5,7 @@
 # -----------------------------
 FIRST_NAME="Lucas"
 LAST_NAME="Silva"
-EMAIL="lucas.silva@gmail.com"
+EMAIL="cantaruttimatheus94@gmail.com"
 SSN="98765432100"
 BIRTH_DATE="1998-05-15"
 COURSE="COLLEGE_MASTER"
