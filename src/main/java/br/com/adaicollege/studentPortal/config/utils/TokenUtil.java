@@ -13,26 +13,25 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-
 public class TokenUtil {
 
-    // put on an env file
     public static final String EMISSOR = "ADAI_COLLEGE";
     public static final long EXPIRATION = 60 * 60 * 1000;
     public static final String SECRET_KEY = "0123456789012345678901234567890123456789";
 
+
     public static MyToken encode(UserLogin user) {
         try {
-            Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes()); // private key
+            Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+
             String jwtToken = Jwts.builder()
                     .subject(user.getRegistrationNumber())
+                    .issuer(EMISSOR)
                     .claim("roles", user.getRoles())
                     .expiration(new Date(System.currentTimeMillis() + EXPIRATION))
-                    .issuer(EMISSOR)
                     .signWith(key)
                     .compact();
 
@@ -40,42 +39,54 @@ public class TokenUtil {
 
         } catch (Exception ex) {
             ex.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
-    public static Authentication decode (HttpServletRequest request) {
+    public static Authentication decode(HttpServletRequest request) {
 
         try {
-
             String header = request.getHeader("Authorization");
-
-            if (header != null) {
-                String token = header.replace("Bearer", "").trim();
-
-                SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
-                JwtParser parser = Jwts.parser().verifyWith(key).build();
-                Claims claims = (Claims)parser.parse(token).getPayload();
-
-                String subject = claims.getSubject();
-                List<String> roles = claims.get("roles", List.class);
-                String issuer = claims.getIssuer();
-                Date exp = claims.getExpiration();
-
-                var authorities = roles.stream()
-                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                        .toList();
-
-                if (issuer.equals(EMISSOR) && subject.length() > 0 && exp.after(new Date(System.currentTimeMillis()))) {
-                    return new UsernamePasswordAuthenticationToken("Valid", null, authorities);
-                }
+            if (header == null || !header.startsWith("Bearer ")) {
+                return null;
             }
+
+            String token = header.replace("Bearer", "").trim();
+
+            SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+            JwtParser parser = Jwts.parser().verifyWith(key).build();
+            Claims claims = (Claims) parser.parse(token).getPayload();
+
+            String subject = claims.getSubject();
+            String issuer = claims.getIssuer();
+            Date expiration = claims.getExpiration();
+
+            if (!EMISSOR.equals(issuer)
+                    || subject == null
+                    || expiration == null
+                    || expiration.before(new Date())) {
+                return null;
+            }
+
+            List<String> roles = claims.get("roles", List.class);
+            if (roles == null) {
+                roles = List.of();
+            }
+
+            var authorities = roles.stream()
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                    .toList();
+
+            return new UsernamePasswordAuthenticationToken(
+                    subject,
+                    null,
+                    authorities
+            );
+
         } catch (Exception ex) {
             ex.printStackTrace();
+            return null;
         }
-        return null;
     }
-
-
 }
+

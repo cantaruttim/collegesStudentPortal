@@ -14,7 +14,7 @@ public class RoleService {
     }
 
     public RoleName getStudentRole() {
-        return roleRepo.findyByRoleName(String.valueOf(RoleName.STUDENT))
+        return roleRepo.findByRoleName(RoleName.STUDENT)
                 .map(role -> role.getRoleName())
                 .orElseThrow(() -> new IllegalStateException("STUDENT role not found"));
     }

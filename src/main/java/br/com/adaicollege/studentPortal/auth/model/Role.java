@@ -12,16 +12,16 @@ import java.util.Set;
 public class Role {
 
     @Id
-    private Integer id;
+    private String id;
 
     private RoleName roleName;
     private Set<String> permissions = new HashSet<>();
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
