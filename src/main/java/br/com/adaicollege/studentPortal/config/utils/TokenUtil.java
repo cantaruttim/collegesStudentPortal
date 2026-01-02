@@ -9,11 +9,13 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 
 public class TokenUtil {
@@ -57,11 +59,16 @@ public class TokenUtil {
                 Claims claims = (Claims)parser.parse(token).getPayload();
 
                 String subject = claims.getSubject();
+                List<String> roles = claims.get("roles", List.class);
                 String issuer = claims.getIssuer();
                 Date exp = claims.getExpiration();
 
+                var authorities = roles.stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                        .toList();
+
                 if (issuer.equals(EMISSOR) && subject.length() > 0 && exp.after(new Date(System.currentTimeMillis()))) {
-                    return new UsernamePasswordAuthenticationToken("Valid", null, Collections.emptyList());
+                    return new UsernamePasswordAuthenticationToken("Valid", null, authorities);
                 }
             }
         } catch (Exception ex) {
