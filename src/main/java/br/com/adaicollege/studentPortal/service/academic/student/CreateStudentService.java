@@ -56,7 +56,10 @@ public class CreateStudentService {
     }
 
 
-    @PreAuthorize("hasAnyRole('STUDENT','SECRETARY')")
+    @PreAuthorize("""
+        hasAnyRole('ADMIN','SECRETARY')
+        or (hasRole('STUDENT') and #id == authentication.name)
+    """)
     public StudentResponse update(String id, UpdateStudentRequest request) {
 
         CreateStudent student = repo.findById(id)
@@ -93,5 +96,18 @@ public class CreateStudentService {
                 .stream()
                 .map(StudentResponse::new)
                 .toList();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARY')")
+    public void delete(String id) {
+
+        if (!repo.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Student not found: " + id
+            );
+        }
+
+        repo.deleteById(id);
     }
 }

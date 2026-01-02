@@ -28,7 +28,7 @@ public class TokenUtil {
             Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
             String jwtToken = Jwts.builder()
-                    .subject(user.getRegistrationNumber())
+                    .subject(user.getId())
                     .issuer(EMISSOR)
                     .claim("roles", user.getRoles())
                     .expiration(new Date(System.currentTimeMillis() + EXPIRATION))
@@ -57,12 +57,12 @@ public class TokenUtil {
             JwtParser parser = Jwts.parser().verifyWith(key).build();
             Claims claims = (Claims) parser.parse(token).getPayload();
 
-            String subject = claims.getSubject();
+            String subjectId = claims.getSubject();
             String issuer = claims.getIssuer();
             Date expiration = claims.getExpiration();
 
             if (!EMISSOR.equals(issuer)
-                    || subject == null
+                    || subjectId == null
                     || expiration == null
                     || expiration.before(new Date())) {
                 return null;
@@ -78,7 +78,7 @@ public class TokenUtil {
                     .toList();
 
             return new UsernamePasswordAuthenticationToken(
-                    subject,
+                    subjectId,
                     null,
                     authorities
             );
