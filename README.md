@@ -25,3 +25,7 @@ because we can easily manipulate students' and academic's information.
 - Security is our main goal where, so the student only will be authorized to access the his portal after change the default password on his first access.
 
 - Student's grades are calculated automatically as bussiness rules.
+
+## Tests
+
+All the tests will be found on `scripts` folder
