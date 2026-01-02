@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Document(collection = "users_login")
 public class UserLogin {
@@ -19,6 +21,9 @@ public class UserLogin {
     private boolean firstAccess;
     private LocalDateTime passwordChangedAt;
     private LocalDateTime passwordExpiresAt;
+
+    private Set<String> roles = new HashSet<>();
+
 
     public UserLogin() {}
 
