@@ -1,6 +1,7 @@
 package br.com.adaicollege.studentPortal.auth.model;
 
 
+import br.com.adaicollege.studentPortal.auth.enums.Permission;
 import br.com.adaicollege.studentPortal.auth.enums.RoleName;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,7 +16,7 @@ public class Role {
     private String id;
 
     private RoleName roleName;
-    private Set<String> permissions = new HashSet<>();
+    private Set<Permission> permissions = new HashSet<>();
 
     public String getId() {
         return id;
@@ -33,11 +34,11 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public Set<String> getPermissions() {
+    public Set<Permission> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(Set<String> permissions) {
+    public void setPermissions(Set<Permission> permissions) {
         this.permissions = permissions;
     }
 }

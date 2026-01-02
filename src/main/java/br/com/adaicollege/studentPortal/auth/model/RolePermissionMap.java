@@ -1,0 +1,36 @@
+package br.com.adaicollege.studentPortal.auth.model;
+
+import br.com.adaicollege.studentPortal.auth.enums.Permission;
+import br.com.adaicollege.studentPortal.auth.enums.RoleName;
+
+import java.util.EnumMap;
+import java.util.Set;
+
+public class RolePermissionMap {
+
+    public static final EnumMap<RoleName, Set<Permission>> MAP = new EnumMap<>(RoleName.class);
+
+    static {
+        MAP.put(RoleName.ADMIN, Set.of(
+           Permission.STUDENT_CREATE,
+           Permission.STUDENT_READ,
+           Permission.STUDENT_UPDATE,
+           Permission.STUDENT_DELETE
+        ));
+
+        MAP.put(RoleName.SECRETARY, Set.of(
+            Permission.STUDENT_CREATE,
+            Permission.STUDENT_READ,
+            Permission.STUDENT_UPDATE
+        ));
+
+        MAP.put(RoleName.STUDENT, Set.of(
+                Permission.STUDENT_READ_SELF,
+                Permission.STUDENT_UPDATE_SELF
+        ));
+    }
+
+    private RolePermissionMap() {}
+
+
+}
