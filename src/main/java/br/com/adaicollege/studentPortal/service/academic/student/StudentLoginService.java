@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.service.academic.student;
 
-import br.com.adaicollege.studentPortal.auth.service.RoleService;
+import br.com.adaicollege.studentPortal.service.RoleService;
 import br.com.adaicollege.studentPortal.config.utils.PasswordUtils;
 import br.com.adaicollege.studentPortal.config.utils.StudentNumber;
 import br.com.adaicollege.studentPortal.model.academic.student.CreateStudent;
@@ -24,7 +24,8 @@ public class StudentLoginService {
 
     public StudentLoginService(UserLoginRepository userRepo,
                                PasswordEncoder passwordEncoder,
-                               EmailService emailService, RoleService roleService) {
+                               EmailService emailService,
+                               RoleService roleService) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
@@ -51,7 +52,7 @@ public class StudentLoginService {
         user.setStudentId(student.getId());
         user.setFirstAccess(true);
         user.setPasswordExpiresAt(LocalDateTime.now().plusHours(EXPIRATION_PASSWORD_TIME));
-        user.getRoles().add(String.valueOf(roleService.getStudentRole().name()));
+        user.getRoles().add(String.valueOf(roleService.getStudentRole().getRoleName()));
 
         userRepo.save(user);
 

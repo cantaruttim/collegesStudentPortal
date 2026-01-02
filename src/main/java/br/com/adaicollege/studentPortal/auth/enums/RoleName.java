@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.auth;
+package br.com.adaicollege.studentPortal.auth.enums;
 
 public enum RoleName {
     ADMIN,

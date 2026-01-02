@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.service;
 
-import br.com.adaicollege.studentPortal.auth.RoleName;
+import br.com.adaicollege.studentPortal.auth.enums.RoleName;
 import br.com.adaicollege.studentPortal.auth.model.Role;
 import br.com.adaicollege.studentPortal.repository.login.RoleRepository;
 import org.springframework.stereotype.Service;
@@ -12,6 +12,13 @@ public class RoleService {
 
     public RoleService(RoleRepository repo) {
         this.repo = repo;
+    }
+
+    public Role getByRoleName(RoleName roleName) {
+        return repo.findByRoleName(roleName)
+                .orElseThrow(() ->
+                        new IllegalStateException("Role not found: " + roleName)
+                );
     }
 
     public Role getStudentRole() {

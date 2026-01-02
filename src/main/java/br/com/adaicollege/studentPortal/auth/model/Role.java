@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.auth.model;
 
 
-import br.com.adaicollege.studentPortal.auth.RoleName;
+import br.com.adaicollege.studentPortal.auth.enums.RoleName;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

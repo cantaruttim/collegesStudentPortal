@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.repository.login;
 
-import br.com.adaicollege.studentPortal.auth.RoleName;
+import br.com.adaicollege.studentPortal.auth.enums.RoleName;
 import br.com.adaicollege.studentPortal.auth.model.Role;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
