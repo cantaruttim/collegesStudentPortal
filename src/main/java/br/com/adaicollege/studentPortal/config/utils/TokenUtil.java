@@ -28,7 +28,8 @@ public class TokenUtil {
             Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes()); // private key
             String jwtToken = Jwts.builder()
                     .subject(user.getRegistrationNumber())
-                    .expiration(new Date(System.currentTimeMillis()+EXPIRATION))
+                    .claim("roles", user.getRoles())
+                    .expiration(new Date(System.currentTimeMillis() + EXPIRATION))
                     .issuer(EMISSOR)
                     .signWith(key)
                     .compact();
