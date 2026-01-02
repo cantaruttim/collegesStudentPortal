@@ -16,29 +16,34 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .csrf(csrf -> csrf.disable())
+            .csrf(csrf -> csrf.disable())
 
-                .authorizeHttpRequests( (auth) -> {
+            .authorizeHttpRequests(auth -> auth
 
-                        // PUBLIC
-                    auth.requestMatchers(new AntPathRequestMatcher("/user-login", "POST")).permitAll()
-                        // PROTECTED ENDPOINTS
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/create-student", "GET")).authenticated()
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/create-module", "GET")).authenticated()
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/create-teacher", "GET")).authenticated()
+                .requestMatchers("/user-login").permitAll()
 
-                        .anyRequest().permitAll();
+                .requestMatchers(
+                        "/api/v1/create-student",
+                        "/api/v1/create-module",
+                        "/api/v1/create-teacher"
+                ).hasAnyRole("ADMIN", "SECRETARY")
 
-                    })
+                .requestMatchers(
+                        "/api/v1/student-class-activity-response"
+                ).hasRole("STUDENT")
 
-                .formLogin(form -> form.disable())
-                .httpBasic(basic -> basic.disable());
+                // DEFAULT
+                .anyRequest().authenticated()
+            )
 
-        http.addFilterBefore(
-                new AuthFilter(),
-                UsernamePasswordAuthenticationFilter.class
-        );
+            .formLogin(form -> form.disable())
+            .httpBasic(basic -> basic.disable())
 
+            .addFilterBefore(
+                    new AuthFilter(),
+                    UsernamePasswordAuthenticationFilter.class
+            );
         return http.build();
     }
+
 }
