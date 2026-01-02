@@ -25,8 +25,8 @@ public class RolePermissionMap {
         ));
 
         MAP.put(RoleName.STUDENT, Set.of(
-                Permission.STUDENT_READ_SELF,
-                Permission.STUDENT_UPDATE_SELF
+            Permission.STUDENT_READ_SELF,
+            Permission.STUDENT_UPDATE_SELF
         ));
     }
 
