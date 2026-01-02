@@ -82,4 +82,12 @@ public class UserLogin {
     public void setPasswordChangedAt(LocalDateTime passwordChangedAt) {
         this.passwordChangedAt = passwordChangedAt;
     }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
 }

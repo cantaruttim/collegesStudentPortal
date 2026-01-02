@@ -11,5 +11,5 @@ public interface RoleRepository
             String
         > {
 
-    Optional<Role> findyByName(String name);
+    Optional<Role> findyByRoleName(String name);
 }
