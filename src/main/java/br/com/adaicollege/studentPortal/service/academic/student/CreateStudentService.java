@@ -9,6 +9,7 @@ import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import br.com.adaicollege.studentPortal.repository.academic.CreateStudentRepository;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,9 +31,8 @@ public class CreateStudentService {
         this.loginService = loginService;
     }
 
-    // -------------------------
-    // CREATE
-    // -------------------------
+
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARY')")
     public StudentResponse create(CreateStudentRequest request) {
 
         if (repo.existsBySocialSecurityNumber(request.socialSecurityNumber())) {
@@ -55,9 +55,8 @@ public class CreateStudentService {
         return new StudentResponse(saved);
     }
 
-    // -------------------------
-    // UPDATE
-    // -------------------------
+
+    @PreAuthorize("hasAnyRole('STUDENT','SECRETARY')")
     public StudentResponse update(String id, UpdateStudentRequest request) {
 
         CreateStudent student = repo.findById(id)
@@ -76,9 +75,8 @@ public class CreateStudentService {
         return new StudentResponse(repo.save(student));
     }
 
-    // -------------------------
-    // FIND / LIST
-    // -------------------------
+
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARY', 'STUDENT')")
     public StudentResponse findById(String id) {
         return new StudentResponse(
                 repo.findById(id)
@@ -89,6 +87,7 @@ public class CreateStudentService {
         );
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARY')")
     public List<StudentResponse> listAll() {
         return repo.findAll()
                 .stream()

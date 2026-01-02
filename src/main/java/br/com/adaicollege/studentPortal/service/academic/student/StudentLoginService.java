@@ -7,6 +7,7 @@ import br.com.adaicollege.studentPortal.model.academic.student.CreateStudent;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
 import br.com.adaicollege.studentPortal.service.utils.EmailService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +63,7 @@ public class StudentLoginService {
     }
 
 
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARY')")
     public void resendFirstAccessPassword(CreateStudent student) {
 
         UserLogin user = userRepo.findByRegistrationNumber(
