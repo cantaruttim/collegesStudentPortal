@@ -1,10 +1,12 @@
 package br.com.adaicollege.studentPortal.controller.auth;
 
 import br.com.adaicollege.studentPortal.data.auth.FirstAccessRequest;
+import br.com.adaicollege.studentPortal.data.auth.FirstAccessResponse;
 import br.com.adaicollege.studentPortal.model.academic.student.CreateStudent;
 import br.com.adaicollege.studentPortal.repository.academic.CreateStudentRepository;
 import br.com.adaicollege.studentPortal.service.academic.student.FirstAccessService;
 import br.com.adaicollege.studentPortal.service.academic.student.StudentLoginService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,15 +27,21 @@ public class StudentFirstAccessController {
     }
 
     @PostMapping("/first-access")
-    public ResponseEntity<Void> firstAccess(
-            @RequestBody FirstAccessRequest request
+    public ResponseEntity<FirstAccessResponse> firstAccess(
+            @Valid @RequestBody FirstAccessRequest request
     ) {
         firstAccessService.firstAccess(
                 request.registrationNumber(),
                 request.currentPassword(),
                 request.newPassword()
         );
-        return ResponseEntity.noContent().build();
+
+        FirstAccessResponse response = new FirstAccessResponse(
+                request.registrationNumber(),
+                "Password changed successfully!"
+        );
+
+        return ResponseEntity.ok(response);
     }
 
 

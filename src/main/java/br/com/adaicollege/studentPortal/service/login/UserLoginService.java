@@ -78,6 +78,10 @@ public class UserLoginService {
 
     public void changePassword(ChangePasswordRequest request) {
 
+        if (request.currentPassword() == null || request.newPassword() == null) {
+            throw new IllegalArgumentException(("Password fields cannot be null"));
+        }
+
         UserLogin user = repo
                 .findByRegistrationNumber(request.registrationNumber())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -85,7 +89,7 @@ public class UserLoginService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         if (!encoder.matches(
-                request.oldPassword(),
+                request.currentPassword(),
                 user.getStudentPassword()
         )) {
             throw new RuntimeException("Invalid password");
