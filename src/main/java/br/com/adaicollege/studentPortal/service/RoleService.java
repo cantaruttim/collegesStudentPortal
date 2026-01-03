@@ -5,6 +5,9 @@ import br.com.adaicollege.studentPortal.auth.model.Role;
 import br.com.adaicollege.studentPortal.repository.login.RoleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 public class RoleService {
 
@@ -12,6 +15,18 @@ public class RoleService {
 
     public RoleService(RoleRepository repo) {
         this.repo = repo;
+    }
+
+    public Set<String> resolvePermissions(Set<String> roleNames) {
+        return repo.findByRoleNameIn(
+                        roleNames.stream()
+                                .map(RoleName::valueOf)
+                                .toList()
+                )
+                .stream()
+                .flatMap(role -> role.getPermissions().stream())
+                .map(Enum::name)
+                .collect(Collectors.toSet());
     }
 
     public Role getByRoleName(RoleName roleName) {

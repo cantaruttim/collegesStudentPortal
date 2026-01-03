@@ -15,6 +15,7 @@ import javax.crypto.SecretKey;
 import java.security.Key;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class TokenUtil {
 
@@ -30,7 +31,10 @@ public class TokenUtil {
             String jwtToken = Jwts.builder()
                     .subject(user.getId())
                     .issuer(EMISSOR)
+
                     .claim("roles", user.getRoles())
+                    .claim("permissions", user.getPermissions())
+
                     .expiration(new Date(System.currentTimeMillis() + EXPIRATION))
                     .signWith(key)
                     .compact();
@@ -47,44 +51,43 @@ public class TokenUtil {
 
         try {
             String header = request.getHeader("Authorization");
+
             if (header == null || !header.startsWith("Bearer ")) {
                 return null;
             }
 
-            String token = header.replace("Bearer", "").trim();
+            String token = header.replace("Bearer ", "");
 
             SecretKey key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
-            JwtParser parser = Jwts.parser().verifyWith(key).build();
-            Claims claims = (Claims) parser.parse(token).getPayload();
 
-            String subjectId = claims.getSubject();
-            String issuer = claims.getIssuer();
-            Date expiration = claims.getExpiration();
+            Claims claims = Jwts.parser()
+                    .verifyWith(key)
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
 
-            if (!EMISSOR.equals(issuer)
-                    || subjectId == null
-                    || expiration == null
-                    || expiration.before(new Date())) {
-                return null;
-            }
+            String subject = claims.getSubject();
 
             List<String> roles = claims.get("roles", List.class);
-            if (roles == null) {
-                roles = List.of();
-            }
+            List<String> permissions = claims.get("permissions", List.class);
 
-            var authorities = roles.stream()
-                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                    .toList();
+            var authorities = Stream.concat(
+                    roles.stream()
+                            .map(r ->
+                                    new SimpleGrantedAuthority(
+                                            "ROLE_" + r)
+                            ),
+                    permissions.stream()
+                            .map(SimpleGrantedAuthority::new)
+            ).toList();
 
             return new UsernamePasswordAuthenticationToken(
-                    subjectId,
+                    subject,
                     null,
                     authorities
             );
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
             return null;
         }
     }

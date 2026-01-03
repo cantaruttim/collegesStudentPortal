@@ -7,19 +7,23 @@ import br.com.adaicollege.studentPortal.config.utils.TokenUtil;
 import br.com.adaicollege.studentPortal.data.auth.ChangePasswordRequest;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
+import br.com.adaicollege.studentPortal.service.RoleService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Service
 public class UserLoginService {
 
 
     private final UserLoginRepository repo;
+    private final RoleService roleService;
 
-    public UserLoginService(UserLoginRepository repo) {
+    public UserLoginService(UserLoginRepository repo, RoleService roleService) {
         this.repo = repo;
+        this.roleService = roleService;
     }
 
     public UserLogin addUser(UserLogin user ) {
@@ -53,6 +57,17 @@ public class UserLoginService {
 
             throw new FirstAccessPasswordChangeRequiredException();
         }
+
+        Set<String> roles = storedUser.getRoles(); // já é Set<String>
+
+        Set<String> permissions =
+                roleService.resolvePermissions(roles);
+
+        UserLogin tokenUser = new UserLogin();
+        tokenUser.setRegistrationNumber(storedUser.getRegistrationNumber());
+        tokenUser.setRoles(roles);
+        tokenUser.setPermissions(permissions);
+
 
         return TokenUtil.encode(storedUser);
     }
