@@ -55,10 +55,9 @@ public class StudentLoginService {
         user.setStudentId(student.getId());
         user.setFirstAccess(true);
         user.setPasswordExpiresAt(LocalDateTime.now().plusHours(EXPIRATION_PASSWORD_TIME));
-        user.getRoles().add(String.valueOf(roleService.getStudentRole().getRoleName()));
 
         Role studentRole = roleService.getStudentRole();
-        user.setPermissions(Set.of(studentRole.getRoleName().name()));
+        user.setRoles(Set.of(studentRole.getRoleName().name()));
         user.setPermissions(
                 studentRole.getPermissions()
                         .stream()

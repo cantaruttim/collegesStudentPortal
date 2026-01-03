@@ -1,6 +1,5 @@
 package br.com.adaicollege.studentPortal.auth.model;
 
-
 import br.com.adaicollege.studentPortal.auth.enums.Permission;
 import br.com.adaicollege.studentPortal.auth.enums.RoleName;
 import org.springframework.data.annotation.Id;

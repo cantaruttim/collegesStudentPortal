@@ -3,7 +3,6 @@ package br.com.adaicollege.studentPortal.config.utils;
 import br.com.adaicollege.studentPortal.config.security.auth.MyToken;
 import br.com.adaicollege.studentPortal.model.login.UserLogin;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;

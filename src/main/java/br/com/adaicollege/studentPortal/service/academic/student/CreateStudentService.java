@@ -9,7 +9,11 @@ import br.com.adaicollege.studentPortal.model.enums.StudentStatus;
 import br.com.adaicollege.studentPortal.repository.academic.CreateStudentRepository;
 import br.com.adaicollege.studentPortal.repository.login.UserLoginRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -61,6 +65,20 @@ public class CreateStudentService {
         or (hasRole('STUDENT') and #id == authentication.name)
     """)
     public StudentResponse update(String id, UpdateStudentRequest request) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean isAdminOrSecretary =
+                auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN")) ||
+                        auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_SECRETARY"));
+
+        boolean isStudentUpdatingSelf =
+                auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_STUDENT"))
+                        && auth.getName().equals(id);
+
+        if (!isAdminOrSecretary && !isStudentUpdatingSelf) {
+            throw new AccessDeniedException("You cannot update this student");
+        }
 
         CreateStudent student = repo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(

@@ -41,7 +41,10 @@ public class CreateStudentController {
         return ResponseEntity.ok(service.findById(id));
     }
 
-
+    @PreAuthorize("""
+        hasAnyRole('ADMIN','SECRETARY')
+        or hasRole('STUDENT')
+    """)
     @PutMapping("/updating-student/{id}")
     public ResponseEntity<StudentResponse> update(
             @PathVariable String id,
