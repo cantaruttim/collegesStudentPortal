@@ -28,7 +28,7 @@ public class TokenUtil {
             Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
             String jwtToken = Jwts.builder()
-                    .subject(user.getId())
+                    .subject(user.getRegistrationNumber())
                     .issuer(EMISSOR)
 
                     .claim("roles", user.getRoles())

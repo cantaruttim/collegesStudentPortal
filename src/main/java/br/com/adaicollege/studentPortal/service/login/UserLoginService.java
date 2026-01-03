@@ -39,6 +39,10 @@ public class UserLoginService {
                 .findByRegistrationNumber(user.getRegistrationNumber())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        // TESTING
+        System.out.println("LOGIN USER: " + storedUser.getRegistrationNumber());
+        System.out.println("ROLES: " + storedUser.getRoles());
+
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         if (!encoder.matches(
@@ -69,7 +73,7 @@ public class UserLoginService {
         tokenUser.setPermissions(permissions);
 
 
-        return TokenUtil.encode(storedUser);
+        return TokenUtil.encode(tokenUser);
     }
 
     public void changePassword(ChangePasswordRequest request) {

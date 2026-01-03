@@ -16,33 +16,21 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable())
 
-            .authorizeHttpRequests(auth -> auth
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login", "/auth/first-access").permitAll()
+                        .anyRequest().authenticated()
+                )
 
-                .requestMatchers("/user-login").permitAll()
+                .formLogin(form -> form.disable())
+                .httpBasic(basic -> basic.disable())
 
-                .requestMatchers(
-                        "/api/v1/create-student",
-                        "/api/v1/create-module",
-                        "/api/v1/create-teacher"
-                ).hasAnyRole("ADMIN", "SECRETARY")
+                .addFilterBefore(
+                        new AuthFilter(),
+                        UsernamePasswordAuthenticationFilter.class
+                );
 
-                .requestMatchers(
-                        "/api/v1/student-class-activity-response"
-                ).hasRole("STUDENT")
-
-                // DEFAULT
-                .anyRequest().authenticated()
-            )
-
-            .formLogin(form -> form.disable())
-            .httpBasic(basic -> basic.disable())
-
-            .addFilterBefore(
-                    new AuthFilter(),
-                    UsernamePasswordAuthenticationFilter.class
-            );
         return http.build();
     }
 

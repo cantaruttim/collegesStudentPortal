@@ -1,6 +1,5 @@
 package br.com.adaicollege.studentPortal.auth.config;
 
-
 import br.com.adaicollege.studentPortal.auth.enums.RoleName;
 import br.com.adaicollege.studentPortal.auth.model.Role;
 import br.com.adaicollege.studentPortal.auth.model.RolePermissionMap;
