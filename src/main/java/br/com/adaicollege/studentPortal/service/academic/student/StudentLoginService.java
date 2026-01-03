@@ -1,5 +1,6 @@
 package br.com.adaicollege.studentPortal.service.academic.student;
 
+import br.com.adaicollege.studentPortal.auth.model.Role;
 import br.com.adaicollege.studentPortal.service.RoleService;
 import br.com.adaicollege.studentPortal.config.utils.PasswordUtils;
 import br.com.adaicollege.studentPortal.config.utils.StudentNumber;
@@ -12,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentLoginService {
@@ -53,6 +56,15 @@ public class StudentLoginService {
         user.setFirstAccess(true);
         user.setPasswordExpiresAt(LocalDateTime.now().plusHours(EXPIRATION_PASSWORD_TIME));
         user.getRoles().add(String.valueOf(roleService.getStudentRole().getRoleName()));
+
+        Role studentRole = roleService.getStudentRole();
+        user.setPermissions(Set.of(studentRole.getRoleName().name()));
+        user.setPermissions(
+                studentRole.getPermissions()
+                        .stream()
+                        .map(Enum::name)
+                        .collect(Collectors.toSet())
+        );
 
         userRepo.save(user);
 
