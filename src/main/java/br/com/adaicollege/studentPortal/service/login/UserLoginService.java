@@ -62,7 +62,7 @@ public class UserLoginService {
             throw new FirstAccessPasswordChangeRequiredException();
         }
 
-        Set<String> roles = storedUser.getRoles(); // já é Set<String>
+        Set<String> roles = storedUser.getRoles();
 
         Set<String> permissions =
                 roleService.resolvePermissions(roles);

@@ -61,6 +61,7 @@ public class TokenUtil {
 
             Claims claims = Jwts.parser()
                     .verifyWith(key)
+                    .requireIssuer(EMISSOR)
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();
@@ -70,12 +71,12 @@ public class TokenUtil {
             List<String> roles = claims.get("roles", List.class);
             List<String> permissions = claims.get("permissions", List.class);
 
+            if (roles == null) roles = List.of();
+            if (permissions == null) permissions = List.of();
+
             var authorities = Stream.concat(
                     roles.stream()
-                            .map(r ->
-                                    new SimpleGrantedAuthority(
-                                            "ROLE_" + r)
-                            ),
+                            .map(r -> new SimpleGrantedAuthority("ROLE_" + r)),
                     permissions.stream()
                             .map(SimpleGrantedAuthority::new)
             ).toList();
