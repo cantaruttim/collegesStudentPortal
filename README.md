@@ -14,7 +14,7 @@ because we can easily manipulate students' and academic's information.
 - Spring Boot
 - Spring Security
   - JWT
-  - Password Cryptography (encode, decode)
+  - Password Cryptography (BCrypt)
 - Spring Email
 
 ## Modeling 
@@ -24,8 +24,12 @@ because we can easily manipulate students' and academic's information.
 - Build a system where the registration number of a student is created automatically, as well as, a default password is created automatically. Those two benefits are new to portal student.
 - Security is our main goal where, so the student only will be authorized to access the his portal after change the default password on his first access.
 
-- Student's grades are calculated automatically as bussiness rules.
+- Student's grades are calculated automatically as business rules.
+
+## Roles & Permissions
+- The roles and Permissions were implemented on this system and during the Student creation, this student
+extends Roles and Permissions that specify what they can do
+- To create a Student, must be logged on as ADMIN Role
 
 ## Tests
-
 All the tests will be found on `scripts` folder
