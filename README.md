@@ -19,6 +19,24 @@ because we can easily manipulate students' and academic's information.
 
 ## Modeling 
 
+- Roles and Permissions
+- Create Student
+- User 
+- defaultPassword
+- defaultRegistrationNumber
+- EmailSender
+
+
+- Login
+
+
+- Build Activity By Theacher
+- ActivityForms (Intensive and Master)
+- Coorp
+
+
+
+- Grades
 
 ## Benefits 
 - Build a system where the registration number of a student is created automatically, as well as, a default password is created automatically. Those two benefits are new to portal student.
