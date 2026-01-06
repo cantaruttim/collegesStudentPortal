@@ -1,13 +1,9 @@
 package br.com.adaicollege.studentPortal.service.academic.secretary;
 
-import br.com.adaicollege.studentPortal.config.exceptions.ModuleNotFoundException;
 import br.com.adaicollege.studentPortal.config.exceptions.TeacherNotFoundException;
-import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesResponse;
-import br.com.adaicollege.studentPortal.data.academic.secretary.modules.UpdateModulesRequest;
 import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherRequest;
 import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherResponse;
 import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.UpdateTeacherRequest;
-import br.com.adaicollege.studentPortal.model.academic.secretary.Modules;
 import br.com.adaicollege.studentPortal.model.academic.secretary.Teacher;
 import br.com.adaicollege.studentPortal.repository.academic.TeacherRepository;
 import org.springframework.http.HttpStatus;
@@ -35,7 +31,7 @@ public class TeacherService {
                 repo.findById(id)
                         .orElseThrow(() -> new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "Student not found"
+                                "Teacher not found"
                         )
                 )
         );
