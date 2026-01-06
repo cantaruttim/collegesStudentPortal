@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.data.activities;
+package br.com.adaicollege.studentPortal.data.activities.forms;
 
 public record StudentsActivityFormRequest(
         String registrationNumber,

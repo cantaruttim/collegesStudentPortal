@@ -1,7 +1,7 @@
 package br.com.adaicollege.studentPortal.service.forms;
 
-import br.com.adaicollege.studentPortal.data.activities.ActivityFormsResponse;
-import br.com.adaicollege.studentPortal.data.activities.StudentsActivityFormRequest;
+import br.com.adaicollege.studentPortal.data.activities.forms.ActivityFormsResponse;
+import br.com.adaicollege.studentPortal.data.activities.forms.StudentsActivityFormRequest;
 import br.com.adaicollege.studentPortal.model.forms.activities.StudentsActivityForms;
 import br.com.adaicollege.studentPortal.repository.forms.StudentActivityFormsRepository;
 import org.springframework.http.HttpStatus;

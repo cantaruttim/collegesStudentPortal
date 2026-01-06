@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.model.forms.activities;
 
-import br.com.adaicollege.studentPortal.data.activities.StudentsActivityFormRequest;
+import br.com.adaicollege.studentPortal.data.activities.forms.StudentsActivityFormRequest;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

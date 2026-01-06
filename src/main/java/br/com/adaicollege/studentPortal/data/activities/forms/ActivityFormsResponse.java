@@ -1,4 +1,4 @@
-package br.com.adaicollege.studentPortal.data.activities;
+package br.com.adaicollege.studentPortal.data.activities.forms;
 
 import br.com.adaicollege.studentPortal.model.forms.activities.StudentsActivityForms;
 
