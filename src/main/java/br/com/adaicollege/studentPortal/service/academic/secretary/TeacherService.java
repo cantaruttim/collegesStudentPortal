@@ -51,7 +51,7 @@ public class TeacherService {
 
     @PreAuthorize("""
         hasAnyRole('ADMIN','SECRETARY')
-        or (hasRole('STUDENT') and #id == authentication.name)
+        or (hasRole('TEACHER') and #id == authentication.name)
     """)
     public TeacherResponse update(String id, UpdateTeacherRequest request) {
 
