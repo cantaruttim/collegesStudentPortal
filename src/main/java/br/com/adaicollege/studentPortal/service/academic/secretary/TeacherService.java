@@ -7,6 +7,7 @@ import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.UpdateTe
 import br.com.adaicollege.studentPortal.model.academic.secretary.Teacher;
 import br.com.adaicollege.studentPortal.repository.academic.TeacherRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,6 +20,7 @@ public class TeacherService {
 
     public TeacherService(TeacherRepository repo) { this.repo = repo; }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARY')")
     public TeacherResponse create(TeacherRequest request) {
         Teacher teacher = Teacher.from(request);
         Teacher saved = repo.save(teacher);
@@ -26,6 +28,7 @@ public class TeacherService {
         return new TeacherResponse(saved);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARY')")
     public TeacherResponse findById(String id) {
         return new TeacherResponse(
                 repo.findById(id)
@@ -37,6 +40,7 @@ public class TeacherService {
         );
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARY')")
     public List<TeacherResponse> listAll() {
         return repo.findAll()
                 .stream()
@@ -44,6 +48,11 @@ public class TeacherService {
                 .toList();
     }
 
+
+    @PreAuthorize("""
+        hasAnyRole('ADMIN','SECRETARY')
+        or (hasRole('STUDENT') and #id == authentication.name)
+    """)
     public TeacherResponse update(String id, UpdateTeacherRequest request) {
 
         Teacher teacher = repo.findById(id).orElseThrow(() -> new TeacherNotFoundException(id));
@@ -57,6 +66,7 @@ public class TeacherService {
         return new TeacherResponse(saved);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','SECRETARY')")
     public void delete(String id) {
 
         if (!repo.existsById(id)) {

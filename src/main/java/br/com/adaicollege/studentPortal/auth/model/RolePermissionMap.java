@@ -15,19 +15,34 @@ public class RolePermissionMap {
            Permission.STUDENT_CREATE,
            Permission.STUDENT_READ,
            Permission.STUDENT_UPDATE,
-           Permission.STUDENT_DELETE
+           Permission.STUDENT_DELETE,
+           Permission.TEACHER_CREATE,
+           Permission.TEACHER_READ,
+           Permission.TEACHER_UPDATE,
+           Permission.TEACHER_DELETE
+
         ));
 
         MAP.put(RoleName.SECRETARY, Set.of(
             Permission.STUDENT_CREATE,
             Permission.STUDENT_READ,
-            Permission.STUDENT_UPDATE
+            Permission.STUDENT_UPDATE,
+            Permission.TEACHER_CREATE,
+            Permission.TEACHER_READ,
+            Permission.TEACHER_UPDATE,
+            Permission.TEACHER_DELETE
         ));
 
         MAP.put(RoleName.STUDENT, Set.of(
             Permission.STUDENT_READ_SELF,
             Permission.STUDENT_UPDATE_SELF
         ));
+
+        MAP.put(RoleName.TEACHER, Set.of(
+                Permission.TEACHER_READ_SELF,
+                Permission.TEACHER_UPDATE_SELF
+        ));
+
     }
 
     private RolePermissionMap() {}
