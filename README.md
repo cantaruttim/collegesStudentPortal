@@ -19,9 +19,12 @@ because we can easily manipulate students' and academic's information.
 
 ## Modeling 
 
-- Roles and Permissions
-- Create Student
-- User 
+- Roles and Permissions: It represents the roles and permissions that who is using the system can do
+- Create Student: It represents the forms that the secretary will fill in order to register a student.
+At the end of this process, an email will be sent to the student containing the `user login` and `user password`
+- User: It represents the entity that will be created when a student is created. At the first login the user *must* 
+change his default password to another password.
+
 - defaultPassword
 - defaultRegistrationNumber
 - EmailSender
