@@ -1,6 +1,5 @@
 package br.com.adaicollege.studentPortal.model.academic.secretary;
 
-import br.com.adaicollege.studentPortal.data.academic.secretary.modules.ModulesRequest;
 import br.com.adaicollege.studentPortal.data.academic.secretary.teacher.TeacherRequest;
 import br.com.adaicollege.studentPortal.model.enums.CollegeCourse;
 import org.springframework.data.annotation.Id;

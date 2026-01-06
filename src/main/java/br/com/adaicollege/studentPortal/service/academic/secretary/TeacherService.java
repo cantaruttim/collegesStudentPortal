@@ -61,6 +61,17 @@ public class TeacherService {
         return new TeacherResponse(saved);
     }
 
+    public void delete(String id) {
+
+        if (!repo.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Teacher not found: " + id
+            );
+        }
+        repo.deleteById(id);
+    }
+
 
 
 }
