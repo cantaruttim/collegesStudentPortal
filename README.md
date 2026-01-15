@@ -8,6 +8,16 @@ during the course.
 All the system will be implemented using a No Relational Database MongoDB
 because we can easily manipulate students' and academic's information.
 
+## Already Implemented
+- Create Student functionality 
+- Create User student 
+  - user login default
+  - user password default
+  - first login implemented (must change default password)
+- EmailSender where students can receive user login and password
+- JWT with tokenization of student
+- Roles & Permissions**
+
 ## 🛠️ Technologies & Tools
 
 - Java 21
