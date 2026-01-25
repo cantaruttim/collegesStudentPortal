@@ -1,5 +1,7 @@
 package br.com.adaicollege.studentPortal.model.forms.tasks;
 
+import br.com.adaicollege.studentPortal.data.activities.tasks.CreateTasksResponse;
+
 import java.time.LocalDate;
 
 public class CreateTasks {
@@ -7,7 +9,7 @@ public class CreateTasks {
     // create by teacher, used by students
 
     private String id;
-    private String title;
+    private String titleTask;
     private String subtitle;
     private String description;
     private String teacherId;
@@ -15,28 +17,6 @@ public class CreateTasks {
     private LocalDate createAt;
     private LocalDate expireAt;
     private String responseBy;
-
-    public CreateTasks(
-            String id,
-            String title,
-            String subtitle,
-            String description,
-            String teacherId,
-            String moduleId,
-            LocalDate createAt,
-            LocalDate expireAt,
-            String responseBy
-    ) {
-        this.id = id;
-        this.title = title;
-        this.subtitle = subtitle;
-        this.description = description;
-        this.teacherId = teacherId;
-        this.moduleId = moduleId;
-        this.createAt = createAt;
-        this.expireAt = expireAt;
-        this.responseBy = responseBy;
-    }
 
     public String getId() {
         return id;
@@ -46,12 +26,12 @@ public class CreateTasks {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitleTask() {
+        return titleTask;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String titleTask) {
+        this.titleTask = titleTask;
     }
 
     public String getSubtitle() {
@@ -109,4 +89,19 @@ public class CreateTasks {
     public void setResponseBy(String responseBy) {
         this.responseBy = responseBy;
     }
+
+    public static CreateTasks from(CreateTasksResponse req) {
+        CreateTasks task = new CreateTasks();
+        task.setId(req.id());
+        task.setTitle(req.titleTask());
+        task.setSubtitle(req.subtitle());
+        task.setDescription(req.description());
+        task.setTeacherId(req.teacherId());
+        task.setModuleId(req.moduleId());
+        task.setCreateAt(req.createAt());
+        task.setExpireAt(req.expireAt());
+        task.setResponseBy(req.responseBy());
+        return task;
+    }
+
 }
