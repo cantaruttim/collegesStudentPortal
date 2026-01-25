@@ -44,6 +44,8 @@ change his default password to another password.
 
 
 - Build Activity By Theacher
+  - Here thechers can create activities out of the forms format. Students may upload files and folders to
+  be graded by teachers. 
 - ActivityForms (Intensive and Master)
 - Coorp
 
