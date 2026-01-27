@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.service.tasks;
 
-import br.com.adaicollege.studentPortal.config.exceptions.ModuleNotFoundException;
+import br.com.adaicollege.studentPortal.config.exceptions.TaskNotFoundException;
 import br.com.adaicollege.studentPortal.data.activities.tasks.CreateTasksRequest;
 import br.com.adaicollege.studentPortal.data.activities.tasks.CreateTasksResponse;
 import br.com.adaicollege.studentPortal.model.forms.tasks.CreateTasks;
@@ -19,15 +19,15 @@ public class CreateTaskService {
     }
 
 
-
-    public CreateTasksResponse create(CreateTasksResponse request) {
+    public CreateTasksResponse create(CreateTasksRequest request) {
         CreateTasks task = CreateTasks.from(request);
-        return new CreateTasksResponse(task);
+        CreateTasks saved = repo.save(task);
+        return new CreateTasksResponse(saved);
     }
 
     public CreateTasksResponse findById(String id) {
         return new CreateTasksResponse(
-                repo.findById(id).orElseThrow(() -> new ModuleNotFoundException(id))
+                repo.findById(id).orElseThrow(TaskNotFoundException::new)
         );
     }
 
@@ -58,6 +58,15 @@ public class CreateTaskService {
 
         return new CreateTasksResponse(repo.save(task));
     }
+
+
+    public void delete(String id) {
+        var task = repo.findById(id)
+                .orElseThrow(TaskNotFoundException::new);
+
+        repo.delete(task);
+    }
+
 
 
 

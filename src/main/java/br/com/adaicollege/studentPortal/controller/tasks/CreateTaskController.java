@@ -17,6 +17,10 @@ public class CreateTaskController {
 
     private CreateTaskService service;
 
+    public CreateTaskController(CreateTaskService service) {
+        this.service = service;
+    }
+
     @PostMapping("/create-task")
     public ResponseEntity<CreateTasksResponse> create(
             @RequestBody CreateTasksRequest request
@@ -43,11 +47,10 @@ public class CreateTaskController {
     @PutMapping("/updating-task/{id}")
     public ResponseEntity<CreateTasksResponse> update(
             @PathVariable String id,
-            @RequestBody UpdateStudentRequest request
+            @RequestBody CreateTasksRequest request
     ) {
         return ResponseEntity.ok(service.update(id, request));
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
@@ -56,6 +59,7 @@ public class CreateTaskController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
 
 
 }

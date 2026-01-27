@@ -1,6 +1,6 @@
 package br.com.adaicollege.studentPortal.model.forms.tasks;
 
-import br.com.adaicollege.studentPortal.data.activities.tasks.CreateTasksResponse;
+import br.com.adaicollege.studentPortal.data.activities.tasks.CreateTasksRequest;
 
 import java.time.LocalDate;
 
@@ -90,14 +90,13 @@ public class CreateTasks {
         this.responseBy = responseBy;
     }
 
-    public static CreateTasks from(CreateTasksResponse req) {
+    public static CreateTasks from(CreateTasksRequest req) {
         CreateTasks task = new CreateTasks();
-        task.setId(req.id());
         task.setTitle(req.titleTask());
         task.setSubtitle(req.subtitle());
         task.setDescription(req.description());
-        task.setTeacherId(req.teacherId());
         task.setModuleId(req.moduleId());
+        task.setTeacherId(req.teacherId());
         task.setCreateAt(req.createAt());
         task.setExpireAt(req.expireAt());
         task.setResponseBy(req.responseBy());
