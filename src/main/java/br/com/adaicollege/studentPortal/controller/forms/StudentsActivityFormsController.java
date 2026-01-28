@@ -4,6 +4,7 @@ import br.com.adaicollege.studentPortal.data.activities.forms.ActivityFormsRespo
 import br.com.adaicollege.studentPortal.data.activities.forms.StudentsActivityFormRequest;
 import br.com.adaicollege.studentPortal.service.forms.StudentActivityFormsService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,12 +13,13 @@ import java.util.List;
 @RequestMapping("/api/v1/student-class-activity-response")
 public class StudentsActivityFormsController {
 
-    private StudentActivityFormsService service;
+    private final StudentActivityFormsService service;
 
     public StudentsActivityFormsController(StudentActivityFormsService service) {
         this.service = service;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
     @PostMapping
     public ResponseEntity<ActivityFormsResponse> create(
             @RequestBody StudentsActivityFormRequest request
@@ -26,11 +28,15 @@ public class StudentsActivityFormsController {
         return ResponseEntity.status(201).body(saved);
     }
 
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
     @GetMapping
     public ResponseEntity<List<ActivityFormsResponse>> listAll() {
         return ResponseEntity.ok(service.listAll());
     }
 
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
     @GetMapping("/{id}")
     public ResponseEntity<ActivityFormsResponse> getById(
             @PathVariable String id

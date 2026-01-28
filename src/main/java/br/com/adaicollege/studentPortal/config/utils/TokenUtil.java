@@ -81,6 +81,12 @@ public class TokenUtil {
                             .map(SimpleGrantedAuthority::new)
             ).toList();
 
+            System.out.println();
+            System.out.println("------------------------");
+            authorities.forEach(a -> System.out.println(a.getAuthority()));
+            System.out.println("------------------------");
+            System.out.println();
+
             return new UsernamePasswordAuthenticationToken(
                     subject,
                     null,

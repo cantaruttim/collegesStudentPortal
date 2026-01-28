@@ -13,6 +13,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig {
 
     @Bean
+    public AuthFilter authFilter() {
+        return new AuthFilter();
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
@@ -27,7 +32,7 @@ public class WebSecurityConfig {
                 .httpBasic(basic -> basic.disable())
 
                 .addFilterBefore(
-                        new AuthFilter(),
+                        authFilter(),
                         UsernamePasswordAuthenticationFilter.class
                 );
 

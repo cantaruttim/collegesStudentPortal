@@ -8,6 +8,7 @@ import br.com.adaicollege.studentPortal.service.academic.student.FirstAccessServ
 import br.com.adaicollege.studentPortal.service.academic.student.StudentLoginService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,6 +27,7 @@ public class StudentFirstAccessController {
         this.studentRepository = studentRepository;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
     @PostMapping("/first-access")
     public ResponseEntity<FirstAccessResponse> firstAccess(
             @Valid @RequestBody FirstAccessRequest request
@@ -44,7 +46,7 @@ public class StudentFirstAccessController {
         return ResponseEntity.ok(response);
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'STUDENT', 'SECRETARY')")
     @PostMapping("/first-access/resend/{studentId}")
     public ResponseEntity<Void> resendFirstAccessPassword(
             @PathVariable String studentId

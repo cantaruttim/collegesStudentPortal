@@ -20,7 +20,7 @@ public class CreateStudentController {
         this.service = service;
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
     @PostMapping("/create-student")
     public ResponseEntity<StudentResponse> create(
             @RequestBody CreateStudentRequest request
@@ -29,11 +29,13 @@ public class CreateStudentController {
         return ResponseEntity.status(201).body(saved);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
     @GetMapping("/listing-all-students")
     public ResponseEntity<List<StudentResponse>> listAll() {
         return ResponseEntity.ok(service.listAll());
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
     @GetMapping("/listing-one-student/{id}")
     public ResponseEntity<StudentResponse> findById(
             @PathVariable String id
@@ -53,7 +55,7 @@ public class CreateStudentController {
         return ResponseEntity.ok(service.update(id, request));
     }
 
-
+    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
             @PathVariable String id
