@@ -22,13 +22,28 @@ public class AuthFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-        if ( request.getHeader("Authorization") != null ) {
+        String path = request.getServletPath();
+
+        // Endpoints públicos
+        if (path.equals("/login") || path.equals("/auth/first-access")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String authHeader = request.getHeader("Authorization");
+
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+
             Authentication auth = TokenUtil.decode(request);
+
             if (auth != null) {
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                SecurityContextHolder
+                        .getContext()
+                        .setAuthentication(auth);
             }
         }
 
         filterChain.doFilter(request, response);
     }
+
 }

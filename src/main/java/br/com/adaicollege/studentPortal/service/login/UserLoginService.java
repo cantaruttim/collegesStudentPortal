@@ -52,15 +52,31 @@ public class UserLoginService {
             throw new RuntimeException("Unauthorized user");
         }
 
-        if (storedUser.isFirstAccess()) {
-            if (storedUser.getPasswordExpiresAt()
-                    .isBefore(LocalDateTime.now())) {
+//        if (storedUser.isFirstAccess()) {
+//            if (storedUser.getPasswordExpiresAt()
+//                    .isBefore(LocalDateTime.now())) {
+//
+//                throw new PasswordExpiredException();
+//            }
+//
+//            throw new FirstAccessPasswordChangeRequiredException();
+//        }
 
+        if (
+                storedUser.isFirstAccess()
+                        && !storedUser.getRoles().contains("ADMIN")
+        ) {
+            if (
+                    storedUser.getPasswordExpiresAt() != null &&
+                            storedUser.getPasswordExpiresAt().isBefore(LocalDateTime.now())
+            ) {
                 throw new PasswordExpiredException();
             }
 
             throw new FirstAccessPasswordChangeRequiredException();
         }
+
+
 
         Set<String> roles = storedUser.getRoles();
 

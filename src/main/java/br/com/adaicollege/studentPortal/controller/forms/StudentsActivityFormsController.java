@@ -19,7 +19,7 @@ public class StudentsActivityFormsController {
         this.service = service;
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
+    @PreAuthorize("hasRole('ADMIN', 'SECRETARY')")
     @PostMapping
     public ResponseEntity<ActivityFormsResponse> create(
             @RequestBody StudentsActivityFormRequest request
@@ -29,14 +29,14 @@ public class StudentsActivityFormsController {
     }
 
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
+    @PreAuthorize("hasRole('ADMIN', 'SECRETARY')")
     @GetMapping
     public ResponseEntity<List<ActivityFormsResponse>> listAll() {
         return ResponseEntity.ok(service.listAll());
     }
 
 
-    @PreAuthorize("hasAnyRole('ADMIN', 'SECRETARY')")
+    @PreAuthorize("hasRole('ADMIN', 'SECRETARY')")
     @GetMapping("/{id}")
     public ResponseEntity<ActivityFormsResponse> getById(
             @PathVariable String id
